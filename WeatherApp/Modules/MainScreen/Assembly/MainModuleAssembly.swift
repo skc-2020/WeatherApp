@@ -5,19 +5,17 @@
 //  Created by AndUser on 13.03.2021.
 //
 
-import UIKit
-
 final class MainModuleAssembly {
 
-    static func buildModule(with model: Weather.DailyModel) -> UIViewController {
+    static func buildModule() -> BaseViewController {
         let view = MainScreen()
         let interactor = MainModuleInteractor()
-        let presenter = MainScreenPresenter(with: model)
+        let presenter = MainScreenPresenter(view: view, interactor: interactor)
 
-        presenter.view = view
-        presenter.interactor = interactor
         view.lifecycleListener = presenter
+        view.output = presenter
 
         return view
     }
+
 }

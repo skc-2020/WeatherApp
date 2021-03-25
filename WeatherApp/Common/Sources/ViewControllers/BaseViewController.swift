@@ -9,7 +9,9 @@ import UIKit
 
 class BaseViewController: UIViewController {
 
-    var lifecycleListener: LifecycleListener?
+    weak var lifecycleListener: LifecycleListener?
+
+    // MARK: - Override functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,4 +24,6 @@ class BaseViewController: UIViewController {
 
         lifecycleListener?.viewWillAppear()
     }
+
 }
+ 

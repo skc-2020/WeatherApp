@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 final class DailyView: UIView {
 
@@ -55,19 +54,9 @@ final class DailyView: UIView {
         return stackView
     }()
 
-    private let minTemperatureLabel: CustomLabel = {
-        let label = CustomLabel()
-        label.font = UIFont.systemFont(ofSize: 20)
+    private let minTemperatureLabel = makeTemperaratureLabel()
 
-        return label
-    }()
-
-    private let maxTemperatureLabel: CustomLabel = {
-        let label = CustomLabel()
-        label.font = UIFont.systemFont(ofSize: 20)
-
-        return label
-    }()
+    private let maxTemperatureLabel = makeTemperaratureLabel()
 
     // MARK: - Initializers
 
@@ -82,34 +71,29 @@ final class DailyView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }
 
 // MARK: - Configuration
 
 extension DailyView: ViewConfiguration {
 
-    struct Model {
-        let locationName: String
-        let cloudiness: String
-        let temperature: String
-        let maxTemperature: String
-        let minTemperature: String
-        let humidity: String?
-        let description: String?
-    }
+    typealias Model = Weather.DailyModel
 
     func configure(with model: Model) {
         locationNameLabel.text = model.locationName
         cloudinessLabel.text = model.cloudiness
         temperatureLabel.text = model.temperature
-        maxTemperatureLabel.text = "H: " + model.maxTemperature + "°"
-        minTemperatureLabel.text = "L: " + model.minTemperature + "°"
+        maxTemperatureLabel.text = model.maxTemperature
+        minTemperatureLabel.text = model.minTemperature
     }
+
 }
 
 // MARK: - Setup View
 
-extension DailyView {
+private extension DailyView {
+
     func setupView() {
         stackView.addArrangedSubview(
             locationNameLabel,
@@ -125,17 +109,33 @@ extension DailyView {
 
         addSubviews(stackView)
     }
+
 }
 
 // MARK: - Setup Constraints
 
-extension DailyView {
+private extension DailyView {
+
     func setupStackViewLayout() {
         translatesAutoresizingMaskIntoConstraints = false
 
-        stackView.snp.makeConstraints { (make) in
-            make.top.equalTo(snp.top).offset(190)
-            make.centerX.equalTo(snp.centerX)
-        }
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 190),
+            stackView.centerXAnchor.constraint(equalTo: centerXAnchor)
+        ])
     }
+
+}
+
+// MARK: - Make functions
+
+private extension DailyView {
+
+    static func makeTemperaratureLabel() -> CustomLabel {
+        let label = CustomLabel()
+        label.font = UIFont.systemFont(ofSize: 20)
+
+        return label
+    }
+
 }

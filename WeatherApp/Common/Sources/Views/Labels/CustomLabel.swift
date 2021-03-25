@@ -30,5 +30,5 @@ private extension CustomLabel {
         translatesAutoresizingMaskIntoConstraints = false
         textColor = .white
     }
-}
 
+}

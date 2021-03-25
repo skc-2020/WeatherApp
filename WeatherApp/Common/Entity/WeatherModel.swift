@@ -20,8 +20,8 @@ struct Weather {
         let locationName: String
         let cloudiness: String
         let temperature: String
-        let maxTemperature: String
-        let minTemperature: String
+        var maxTemperature: String
+        var minTemperature: String
         let humidity: String?
         let description: String?
 
