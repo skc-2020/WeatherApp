@@ -10,8 +10,9 @@ protocol MainModuleInteractorProtocol {
 }
 
 struct MainModuleInteractor: MainModuleInteractorProtocol {
+
     func getDailyWeather() -> Weather.DailyModel {
-        Weather.mockedDailyWeather
+        Weather.DailyModel.mock
     }
 
 }

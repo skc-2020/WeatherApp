@@ -21,7 +21,7 @@ final class DailyView: UIView {
 
     private let locationNameLabel: CustomLabel = {
         let label = CustomLabel()
-        label.font = UIFont.systemFont(ofSize: 30)
+        label.font = DesignSystem.Fonts.large
         label.textAlignment = .center
 
         return label
@@ -29,7 +29,7 @@ final class DailyView: UIView {
 
     private let cloudinessLabel: CustomLabel = {
         let label = CustomLabel()
-        label.font = UIFont.systemFont(ofSize: 19)
+        label.font = DesignSystem.Fonts.medium1
         label.textAlignment = .center
 
         return label
@@ -37,7 +37,7 @@ final class DailyView: UIView {
 
     private let temperatureLabel: CustomLabel = {
         let label = CustomLabel()
-        label.font = UIFont.systemFont(ofSize: 90, weight: .light)
+        label.font = DesignSystem.Fonts.lightGiant
         label.textAlignment = .center
 
         return label
@@ -133,7 +133,7 @@ private extension DailyView {
 
     static func makeTemperaratureLabel() -> CustomLabel {
         let label = CustomLabel()
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = DesignSystem.Fonts.medium2
 
         return label
     }

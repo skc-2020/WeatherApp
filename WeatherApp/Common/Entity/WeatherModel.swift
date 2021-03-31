@@ -7,15 +7,15 @@
 
 struct Weather {
 
-    static let mockedDailyWeather: DailyModel = .init(locationName: "Kyiv",
-                                                      cloudiness: "Mostly cloudy",
-                                                      temperature: "-4",
-                                                      maxTemperature: "3",
-                                                      minTemperature: "-9",
-                                                      humidity: "",
-                                                      description: "")
-
     struct DailyModel {
+
+        static let mock = Self(locationName: "Kyiv",
+                               cloudiness: "Mostly cloudy",
+                               temperature: "-4",
+                               maxTemperature: "3",
+                               minTemperature: "-9",
+                               humidity: "",
+                               description: "")
 
         let locationName: String
         let cloudiness: String

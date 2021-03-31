@@ -23,7 +23,6 @@
 		CA5D168325FEB49300DA6E6F /* MainScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5D168225FEB49300DA6E6F /* MainScreenPresenter.swift */; };
 		CA952C9825FA1EB30073893A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA952C9725FA1EB30073893A /* AppDelegate.swift */; };
 		CA952C9C25FA1EB30073893A /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA952C9B25FA1EB30073893A /* MainScreen.swift */; };
-		CA952C9F25FA1EB30073893A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA952C9D25FA1EB30073893A /* Main.storyboard */; };
 		CA952CA125FA1EB60073893A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA952CA025FA1EB60073893A /* Assets.xcassets */; };
 		CA952CA425FA1EB60073893A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA952CA225FA1EB60073893A /* LaunchScreen.storyboard */; };
 		CAEF817F260A29EA000DF5B8 /* UIStackViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEF817E260A29EA000DF5B8 /* UIStackViewExtensions.swift */; };
@@ -51,7 +50,6 @@
 		CA952C9425FA1EB30073893A /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA952C9725FA1EB30073893A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA952C9B25FA1EB30073893A /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
-		CA952C9E25FA1EB30073893A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CA952CA025FA1EB60073893A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA952CA325FA1EB60073893A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA952CA525FA1EB60073893A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "/Users/anduser/Xcode_projects/WeatherApp/WeatherApp/Supporting files/Info.plist"; sourceTree = "<absolute>"; };
@@ -120,7 +118,6 @@
 			children = (
 				CA952CA025FA1EB60073893A /* Assets.xcassets */,
 				CA952CA225FA1EB60073893A /* LaunchScreen.storyboard */,
-				CA952C9D25FA1EB30073893A /* Main.storyboard */,
 				CA952CA525FA1EB60073893A /* Info.plist */,
 			);
 			path = "Supporting files";
@@ -330,7 +327,6 @@
 			files = (
 				CA952CA425FA1EB60073893A /* LaunchScreen.storyboard in Resources */,
 				CA952CA125FA1EB60073893A /* Assets.xcassets in Resources */,
-				CA952C9F25FA1EB30073893A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,14 +402,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CA952C9D25FA1EB30073893A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CA952C9E25FA1EB30073893A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CA952CA225FA1EB60073893A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

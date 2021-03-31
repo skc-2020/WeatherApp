@@ -9,4 +9,5 @@ protocol ViewConfiguration {
 
     associatedtype Model
     func configure(with model: Model)
+
 }

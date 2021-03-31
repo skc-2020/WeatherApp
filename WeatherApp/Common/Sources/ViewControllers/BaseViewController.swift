@@ -9,6 +9,8 @@ import UIKit
 
 class BaseViewController: UIViewController {
 
+    // MARK: - Lifecycle Listener
+
     weak var lifecycleListener: LifecycleListener?
 
     // MARK: - Override functions
@@ -23,6 +25,24 @@ class BaseViewController: UIViewController {
         super.viewWillAppear(animated)
 
         lifecycleListener?.viewWillAppear()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        lifecycleListener?.viewDidAppear()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        lifecycleListener?.viewWillDisappear()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        lifecycleListener?.viewDidDisappear()
     }
 
 }

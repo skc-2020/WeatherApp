@@ -9,9 +9,9 @@ final class MainScreenPresenter {
 
     // MARK: - External dependencies
 
-    unowned let view: MainScreenInput!
+    private unowned let view: MainScreenInput
 
-    let interactor: MainModuleInteractor!
+    private let interactor: MainModuleInteractor
 
     // MARK: - Initializers
 
