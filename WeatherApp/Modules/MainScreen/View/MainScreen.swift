@@ -85,7 +85,7 @@ private extension MainScreen {
 extension MainScreen: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        Weather.mockedWeeklyWeather.count
+        Weather.HourlyModel.mock.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -96,7 +96,7 @@ extension MainScreen: UITableViewDataSource, UITableViewDelegate {
 
         guard let cell = reusableCell else { return UITableViewCell() }
 
-        cell.configure(with: Weather.mockedWeeklyWeather[indexPath.row])
+        cell.configure(with: Weather.WeeklyModel.mock[indexPath.row])
         tableView.separatorColor = UIColor.clear
 
         return cell

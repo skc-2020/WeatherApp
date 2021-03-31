@@ -28,6 +28,7 @@ fabric.properties
 #           - Also handy if you have a large number of dependant pods
 #           - AS PER https://guides.cocoapods.org/using/using-cocoapods.html NEVER IGNORE THE LOCK FILE
 Pods/
+/Pods/
 
 ### macOS ###
 # General
@@ -83,7 +84,6 @@ xcshareddata
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
-WeatherApp/Supporting\ files/*
 
 ## Obj-C/Swift specific
 *.hmap

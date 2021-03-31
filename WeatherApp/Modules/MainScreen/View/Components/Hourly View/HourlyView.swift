@@ -59,7 +59,7 @@ extension HourlyView: UICollectionViewDelegateFlowLayout {
 extension HourlyView: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        Weather.mockedHourlyWeather.count
+        Weather.HourlyModel.mock.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,7 +67,7 @@ extension HourlyView: UICollectionViewDelegate, UICollectionViewDataSource {
 
         guard let cell = reusableCell else { return UICollectionViewCell() }
 
-        cell.configure(with: Weather.mockedHourlyWeather[indexPath.row])
+        cell.configure(with: Weather.HourlyModel.mock[indexPath.row])
 
         return cell
     }
