@@ -14,7 +14,7 @@ extension MainScreen {
     static func map(model: Model) -> Model {
         Model(locationName: model.locationName,
               cloudiness: model.cloudiness,
-              temperature: model.temperature,
+              temperature: model.temperature + "°",
               maxTemperature: "H: " + model.maxTemperature + "°",
               minTemperature: "L: " + model.minTemperature + "°",
               humidity: model.humidity,
