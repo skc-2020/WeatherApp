@@ -69,23 +69,21 @@ private extension HourlyViewCell {
                     cloudnessImage,
                     temperatureLabel)
 
-        NSLayoutConstraint.activate([
-            hourLabel.leadingAnchor.constraint(equalTo:  leadingAnchor, constant: 10),
-            hourLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            hourLabel.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-            hourLabel.heightAnchor.constraint(equalToConstant: 34),
+        hourLabel.pinLeadingEdge(to: self, attribute: .leading, constant: 10)
+        hourLabel.pinTrailingEdge(to: self, attribute: .trailing, constant: -10)
+        hourLabel.pinTop(to: self, attribute: .top, constant: 4)
+        hourLabel.height(equalTo: 34)
 
-            cloudnessImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            cloudnessImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            cloudnessImage.topAnchor.constraint(equalTo: hourLabel.bottomAnchor, constant: 4),
-            cloudnessImage.heightAnchor.constraint(equalToConstant: 37),
-            cloudnessImage.widthAnchor.constraint(equalTo: cloudnessImage.heightAnchor),
+        cloudnessImage.pinLeadingEdge(to: self, attribute: .leading, constant: 10)
+        cloudnessImage.pinTrailingEdge(to: self, attribute: .trailing, constant: -10)
+        cloudnessImage.pinTop(to: hourLabel, attribute: .bottom, constant: 4)
+        cloudnessImage.height(equalTo: 37)
+        cloudnessImage.width(equalTo: 37)
 
-            temperatureLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            temperatureLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            temperatureLabel.topAnchor.constraint(equalTo: cloudnessImage.bottomAnchor, constant: 4),
-            temperatureLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
+        temperatureLabel.pinLeadingEdge(to: self, attribute: .leading, constant: 10)
+        temperatureLabel.pinTrailingEdge(to: self, attribute: .trailing, constant: -10)
+        temperatureLabel.pinTop(to: cloudnessImage, attribute: .bottom, constant: 4)
+        temperatureLabel.pinBottom(to: self, attribute: .bottom)
     }
 
 }

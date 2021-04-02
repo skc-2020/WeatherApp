@@ -27,12 +27,11 @@ extension UIView {
     func pinToSuperview() {
         guard let superview = superview else { return }
 
-        NSLayoutConstraint.activate([
-            topAnchor.constraint(equalTo: superview.topAnchor),
-            bottomAnchor.constraint(equalTo: superview.bottomAnchor),
-            leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-            trailingAnchor.constraint(equalTo: superview.trailingAnchor)
-        ])
+        self.pinTop(to: superview, attribute: .top)
+        self.pinBottom(to: superview, attribute: .bottom)
+        self.pinLeadingEdge(to: superview, attribute: .leading)
+        self.pinTrailingEdge(to: superview, attribute: .trailing)
+
     }
 
 }

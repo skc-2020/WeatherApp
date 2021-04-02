@@ -36,6 +36,8 @@ final class MainScreen: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        requestWeather()
+        
         setupView()
         setupViewConstraints()
     }
@@ -62,22 +64,20 @@ private extension MainScreen {
 private extension MainScreen {
 
     func setupViewConstraints() {
-        NSLayoutConstraint.activate([
-            dailyView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            dailyView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            dailyView.topAnchor.constraint(equalTo: view.topAnchor),
-            dailyView.heightAnchor.constraint(equalToConstant: 410),
+        dailyView.pinLeadingEdge(to: view, attribute: .leading)
+        dailyView.pinTrailingEdge(to: view, attribute: .trailing)
+        dailyView.pinTop(to: view, attribute: .top)
+        dailyView.height(equalTo: 410)
 
-            hourlyView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            hourlyView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            hourlyView.topAnchor.constraint(equalTo: dailyView.bottomAnchor),
-            hourlyView.heightAnchor.constraint(equalToConstant: 120),
+        hourlyView.pinLeadingEdge(to: view, attribute: .leading, constant: 15)
+        hourlyView.pinTrailingEdge(to: view, attribute: .trailing)
+        hourlyView.pinTop(to: dailyView, attribute: .bottom)
+        hourlyView.height(equalTo: 120)
 
-            weeklyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            weeklyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            weeklyTableView.topAnchor.constraint(equalTo: hourlyView.bottomAnchor),
-            weeklyTableView.heightAnchor.constraint(equalToConstant: 600)
-        ])
+        weeklyTableView.pinLeadingEdge(to: view, attribute: .leading, constant: 10)
+        weeklyTableView.pinTrailingEdge(to: view, attribute: .trailing)
+        weeklyTableView.pinTop(to: hourlyView, attribute: .bottom)
+        weeklyTableView.height(equalTo: 600)
     }
 
 }

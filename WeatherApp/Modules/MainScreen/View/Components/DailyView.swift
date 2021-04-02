@@ -113,10 +113,8 @@ private extension DailyView {
     func setupStackViewLayout() {
         translatesAutoresizingMaskIntoConstraints = false
 
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 120),
-            stackView.centerXAnchor.constraint(equalTo: centerXAnchor)
-        ])
+        stackView.pinTop(to: self, attribute: .top, constant: 120)
+        stackView.centerX(equalsCenter: self)
     }
 
 }

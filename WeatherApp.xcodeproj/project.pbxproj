@@ -32,6 +32,7 @@
 		CA952C9C25FA1EB30073893A /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA952C9B25FA1EB30073893A /* MainScreen.swift */; };
 		CA952CA125FA1EB60073893A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA952CA025FA1EB60073893A /* Assets.xcassets */; };
 		CA952CA425FA1EB60073893A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA952CA225FA1EB60073893A /* LaunchScreen.storyboard */; };
+		CAA4EA4426150A0F005D6916 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA4EA4326150A0F005D6916 /* UIView+Layout.swift */; };
 		CAEF817F260A29EA000DF5B8 /* UIStackViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEF817E260A29EA000DF5B8 /* UIStackViewExtensions.swift */; };
 		ECCFC916BD67C6E0960E08C3 /* Pods_WeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DCACFB9B29E941B2B4C3D47 /* Pods_WeatherApp.framework */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 		CA952CA025FA1EB60073893A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA952CA325FA1EB60073893A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA952CA525FA1EB60073893A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "/Users/anduser/Xcode_projects/WeatherApp/WeatherApp/Supporting files/Info.plist"; sourceTree = "<absolute>"; };
+		CAA4EA4326150A0F005D6916 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		CAEF817E260A29EA000DF5B8 /* UIStackViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -274,11 +276,20 @@
 			path = WeatherApp;
 			sourceTree = "<group>";
 		};
+		CAC2BC8B261799970091091A /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				CAA4EA4326150A0F005D6916 /* UIView+Layout.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
 		CAEF8184260A2C23000DF5B8 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				CA22BD83260A32F600B0F6C6 /* Design System */,
 				CA5D165625FCFD7100DA6E6F /* Extensions */,
+				CAC2BC8B261799970091091A /* Layout */,
 				CA5D165A25FCFDBC00DA6E6F /* Protocols */,
 				CA5D165425FCFC9C00DA6E6F /* ViewControllers */,
 				CA5D165B25FCFDCB00DA6E6F /* Views */,
@@ -422,6 +433,7 @@
 				CA2B1908260DCBD500EDB15D /* HourlyView.swift in Sources */,
 				CA22BD88260A7B6800B0F6C6 /* MainScreenOutput.swift in Sources */,
 				CA5D167F25FEB30000DA6E6F /* CustomLabel.swift in Sources */,
+				CAA4EA4426150A0F005D6916 /* UIView+Layout.swift in Sources */,
 				CA14F75625FF5D5700637EA2 /* MainScreenInput.swift in Sources */,
 				CA2B1911260DE28D00EDB15D /* WeeklyTableView.swift in Sources */,
 				CA7C43B0261A15D9007BEC87 /* CollectionViewsExtension.swift in Sources */,
