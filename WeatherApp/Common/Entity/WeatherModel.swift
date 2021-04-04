@@ -9,14 +9,6 @@ struct Weather {
 
     struct DailyModel {
 
-        static let mock = Self(locationName: "Kyiv",
-                               cloudiness: "Mostly cloudy",
-                               temperature: "-4",
-                               maxTemperature: "3",
-                               minTemperature: "-9",
-                               humidity: "",
-                               description: "")
-
         let locationName: String
         let cloudiness: String
         let temperature: String
@@ -25,9 +17,21 @@ struct Weather {
         let humidity: String?
         let description: String?
 
+        static let mock = Self(locationName: "Kyiv",
+                               cloudiness: "Mostly cloudy",
+                               temperature: "-4",
+                               maxTemperature: "3",
+                               minTemperature: "-9",
+                               humidity: "",
+                               description: "")
+
     }
 
     struct HourlyModel {
+
+        let hour: String
+        let icon: String
+        let temperature: String
 
         static let mock = [
             Self(hour: "Now", icon: "sunny", temperature: "11"),
@@ -37,14 +41,15 @@ struct Weather {
             Self(hour: "19", icon: "cloudy", temperature: "13"),
             Self(hour: "20", icon: "sunny", temperature: "13")
         ]
-
-        let hour: String
-        let icon: String
-        let temperature: String
-
     }
 
     struct WeeklyModel {
+
+        let dayOfWeek: String
+        let icon: String
+        let maxTemperature: String
+        let minTemperature: String
+        let humidity: String
 
         static let mock = [
             Self(dayOfWeek: "Monday",
@@ -93,12 +98,6 @@ struct Weather {
                  minTemperature: "-8",
                  humidity: "50%")
         ]
-
-        let dayOfWeek: String
-        let icon: String
-        let maxTemperature: String
-        let minTemperature: String
-        let humidity: String
 
     }
 

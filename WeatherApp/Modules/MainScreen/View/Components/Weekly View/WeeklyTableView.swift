@@ -1,5 +1,5 @@
 //
-//  WeeklyView.swift
+//  WeeklyTableView.swift
 //  WeatherApp
 //
 //  Created by AndUser on 25.03.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class WeeklyView: UITableView {
+final class WeeklyTableView: UITableView {
 
     // MARK: - Initializers
 
@@ -26,7 +26,7 @@ final class WeeklyView: UITableView {
 
 // MARK: - Configuration
 
-extension WeeklyView: ViewConfiguration {
+extension WeeklyTableView: ViewConfiguration {
 
     struct Model {
         let delegate: UITableViewDelegate
@@ -42,25 +42,14 @@ extension WeeklyView: ViewConfiguration {
 
 // MARK: - Setup View
 
-private extension WeeklyView {
+private extension WeeklyTableView {
 
     func setupTableView() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .clear
         rowHeight = 40
 
-        self.register(WeeklyTableViewCell.self,
-                      forCellReuseIdentifier: Constants.cellIdentifier)
-    }
-
-}
-
-// MARK: - Constants
-
-extension WeeklyView {
-
-    struct Constants {
-        static let cellIdentifier = "WeeklyTableViewCell"
+        register(WeeklyTableViewCell.self)
     }
 
 }

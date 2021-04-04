@@ -7,13 +7,13 @@
 
 import UIKit
 
-final class HourlyViewCell: UICollectionViewCell {
+final class HourlyViewCell: UICollectionViewCell, ReusableView {
 
     // MARK: - Private variables
 
     private let hourLabel: CustomLabel = {
         let label = CustomLabel()
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = DesignSystem.Fonts.medium1
         label.textAlignment = .center
 
         return label
@@ -22,21 +22,23 @@ final class HourlyViewCell: UICollectionViewCell {
     private let cloudnessImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleToFill
+        image.contentMode = .scaleAspectFit
 
         return image
     }()
 
-    private let temperatureLabel = makeTemperatureLabel()
+    private let temperatureLabel = makeTemperatureLabel(with: DesignSystem.Fonts.medium3)
 
     // MARK: - Initializers
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        setupView()
         setupViewConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -50,11 +52,19 @@ extension HourlyViewCell {
     typealias Model = Weather.HourlyModel
 
     func configure(with model: Model) {
-        backgroundColor = .clear
-
         hourLabel.text = model.hour
         cloudnessImage.image = UIImage(named: model.icon)
         temperatureLabel.text = model.temperature
+    }
+
+}
+
+// MARK: - Setup View
+
+private extension HourlyViewCell {
+
+    func setupView() {
+        backgroundColor = UIColor(white: 1, alpha: 0)
     }
 
 }

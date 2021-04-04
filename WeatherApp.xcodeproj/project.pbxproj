@@ -13,7 +13,7 @@
 		CA2B1762260BCFFF00EDB15D /* MainScreen+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B1761260BCFFF00EDB15D /* MainScreen+Model.swift */; };
 		CA2B1908260DCBD500EDB15D /* HourlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B1907260DCBD500EDB15D /* HourlyView.swift */; };
 		CA2B190C260DDE1000EDB15D /* HourlyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B190B260DDE1000EDB15D /* HourlyViewCell.swift */; };
-		CA2B1911260DE28D00EDB15D /* WeeklyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B1910260DE28D00EDB15D /* WeeklyView.swift */; };
+		CA2B1911260DE28D00EDB15D /* WeeklyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B1910260DE28D00EDB15D /* WeeklyTableView.swift */; };
 		CA2B1916260DF21000EDB15D /* WeeklyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2B1915260DF21000EDB15D /* WeeklyTableViewCell.swift */; };
 		CA3DFEE625FFB46C000CBF06 /* MainModuleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3DFEE525FFB46C000CBF06 /* MainModuleInteractor.swift */; };
 		CA5D164C25FCFBF500DA6E6F /* MainModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5D164B25FCFBF500DA6E6F /* MainModuleAssembly.swift */; };
@@ -25,6 +25,8 @@
 		CA5D166825FD06B400DA6E6F /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5D166725FD06B400DA6E6F /* DailyView.swift */; };
 		CA5D167F25FEB30000DA6E6F /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5D167E25FEB30000DA6E6F /* CustomLabel.swift */; };
 		CA5D168325FEB49300DA6E6F /* MainScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5D168225FEB49300DA6E6F /* MainScreenPresenter.swift */; };
+		CA7C43AC261A123F007BEC87 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7C43AB261A123F007BEC87 /* ReusableView.swift */; };
+		CA7C43B0261A15D9007BEC87 /* CollectionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7C43AF261A15D9007BEC87 /* CollectionViews.swift */; };
 		CA952C9825FA1EB30073893A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA952C9725FA1EB30073893A /* AppDelegate.swift */; };
 		CA952C9C25FA1EB30073893A /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA952C9B25FA1EB30073893A /* MainScreen.swift */; };
 		CA952CA125FA1EB60073893A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA952CA025FA1EB60073893A /* Assets.xcassets */; };
@@ -43,7 +45,7 @@
 		CA2B1761260BCFFF00EDB15D /* MainScreen+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainScreen+Model.swift"; sourceTree = "<group>"; };
 		CA2B1907260DCBD500EDB15D /* HourlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyView.swift; sourceTree = "<group>"; };
 		CA2B190B260DDE1000EDB15D /* HourlyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyViewCell.swift; sourceTree = "<group>"; };
-		CA2B1910260DE28D00EDB15D /* WeeklyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyView.swift; sourceTree = "<group>"; };
+		CA2B1910260DE28D00EDB15D /* WeeklyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyTableView.swift; sourceTree = "<group>"; };
 		CA2B1915260DF21000EDB15D /* WeeklyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyTableViewCell.swift; sourceTree = "<group>"; };
 		CA3DFEE525FFB46C000CBF06 /* MainModuleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModuleInteractor.swift; sourceTree = "<group>"; };
 		CA5D164B25FCFBF500DA6E6F /* MainModuleAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModuleAssembly.swift; sourceTree = "<group>"; };
@@ -55,6 +57,8 @@
 		CA5D166725FD06B400DA6E6F /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
 		CA5D167E25FEB30000DA6E6F /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		CA5D168225FEB49300DA6E6F /* MainScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenPresenter.swift; sourceTree = "<group>"; };
+		CA7C43AB261A123F007BEC87 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		CA7C43AF261A15D9007BEC87 /* CollectionViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViews.swift; sourceTree = "<group>"; };
 		CA952C9425FA1EB30073893A /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA952C9725FA1EB30073893A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA952C9B25FA1EB30073893A /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
@@ -104,7 +108,7 @@
 		CA2B190F260DE26B00EDB15D /* Weekly View */ = {
 			isa = PBXGroup;
 			children = (
-				CA2B1910260DE28D00EDB15D /* WeeklyView.swift */,
+				CA2B1910260DE28D00EDB15D /* WeeklyTableView.swift */,
 				CA2B1915260DF21000EDB15D /* WeeklyTableViewCell.swift */,
 			);
 			path = "Weekly View";
@@ -188,6 +192,7 @@
 		CA5D165625FCFD7100DA6E6F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CA7C43AF261A15D9007BEC87 /* CollectionViews.swift */,
 				CA5D165725FCFD9700DA6E6F /* UIViewExtensions.swift */,
 				CAEF817E260A29EA000DF5B8 /* UIStackViewExtensions.swift */,
 			);
@@ -199,6 +204,7 @@
 			children = (
 				CA5D165C25FCFDE100DA6E6F /* ViewConfiguration.swift */,
 				CA5D165F25FCFDF900DA6E6F /* LifecycleListener.swift */,
+				CA7C43AB261A123F007BEC87 /* ReusableView.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -414,7 +420,8 @@
 				CA22BD88260A7B6800B0F6C6 /* MainScreenOutput.swift in Sources */,
 				CA5D167F25FEB30000DA6E6F /* CustomLabel.swift in Sources */,
 				CA14F75625FF5D5700637EA2 /* MainScreenInput.swift in Sources */,
-				CA2B1911260DE28D00EDB15D /* WeeklyView.swift in Sources */,
+				CA2B1911260DE28D00EDB15D /* WeeklyTableView.swift in Sources */,
+				CA7C43B0261A15D9007BEC87 /* CollectionViews.swift in Sources */,
 				CA2B1916260DF21000EDB15D /* WeeklyTableViewCell.swift in Sources */,
 				CA2B190C260DDE1000EDB15D /* HourlyViewCell.swift in Sources */,
 				CA952C9C25FA1EB30073893A /* MainScreen.swift in Sources */,
@@ -422,6 +429,7 @@
 				CA5D166325FCFE3800DA6E6F /* WeatherModel.swift in Sources */,
 				CA5D164C25FCFBF500DA6E6F /* MainModuleAssembly.swift in Sources */,
 				CA5D168325FEB49300DA6E6F /* MainScreenPresenter.swift in Sources */,
+				CA7C43AC261A123F007BEC87 /* ReusableView.swift in Sources */,
 				CA3DFEE625FFB46C000CBF06 /* MainModuleInteractor.swift in Sources */,
 				CA22BD85260A332F00B0F6C6 /* DesignSystem.swift in Sources */,
 				CA5D165825FCFD9700DA6E6F /* UIViewExtensions.swift in Sources */,

@@ -37,16 +37,20 @@ extension DesignSystem {
 
         struct Sizes {
             static let small: CGFloat = 8
-            static let medium1: CGFloat = 19
-            static let medium2: CGFloat = 20
+            static let medium0: CGFloat = 16
+            static let medium1: CGFloat = 18
+            static let medium2: CGFloat = 19
+            static let medium3: CGFloat = 20
             static let large: CGFloat = 30
             static let giant: CGFloat = 90
         }
 
+        static let medium0 = UIFont.systemFont(ofSize: Sizes.medium0)
         static let medium1 = UIFont.systemFont(ofSize: Sizes.medium1)
         static let medium2 = UIFont.systemFont(ofSize: Sizes.medium2)
+        static let medium3 = UIFont.systemFont(ofSize: Sizes.medium3)
         static let large = UIFont.systemFont(ofSize: Sizes.large)
-        static let lightGiant = UIFont.systemFont(ofSize: Sizes.giant, weight: .light)
+        static let thinGiant = UIFont.systemFont(ofSize: Sizes.giant, weight: .thin)
 
     }
 

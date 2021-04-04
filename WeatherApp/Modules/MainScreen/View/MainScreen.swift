@@ -9,6 +9,8 @@ import UIKit
 
 final class MainScreen: BaseViewController {
 
+    private let cellId = WeeklyTableView.defaultReuseIdentifier + "Cell"
+
     // MARK: - External Dependencies
 
     var output: MainScreenOutput?
@@ -26,7 +28,7 @@ final class MainScreen: BaseViewController {
         }()
     )
 
-    private let weeklyView = WeeklyView()
+    private let weeklyTableView = WeeklyTableView()
     private let backgroundImage = UIImageView(image: DesignSystem.Images.sky)
 
     // MARK: - Override functions
@@ -49,7 +51,7 @@ private extension MainScreen {
             backgroundImage,
             dailyView,
             hourlyView,
-            weeklyView
+            weeklyTableView
         )
     }
 
@@ -71,10 +73,10 @@ private extension MainScreen {
             hourlyView.topAnchor.constraint(equalTo: dailyView.bottomAnchor),
             hourlyView.heightAnchor.constraint(equalToConstant: 120),
 
-            weeklyView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            weeklyView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            weeklyView.topAnchor.constraint(equalTo: hourlyView.bottomAnchor),
-            weeklyView.heightAnchor.constraint(equalToConstant: 600)
+            weeklyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            weeklyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            weeklyTableView.topAnchor.constraint(equalTo: hourlyView.bottomAnchor),
+            weeklyTableView.heightAnchor.constraint(equalToConstant: 600)
         ])
     }
 
@@ -85,12 +87,12 @@ private extension MainScreen {
 extension MainScreen: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        Weather.HourlyModel.mock.count
+        Weather.WeeklyModel.mock.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let reusableCell = tableView.dequeueReusableCell(
-            withIdentifier: WeeklyView.Constants.cellIdentifier,
+            withIdentifier: cellId,
             for: indexPath
         ) as? WeeklyTableViewCell
 
@@ -111,7 +113,7 @@ extension MainScreen: MainScreenInput {
     func configureMainScreen(with dailyModel: Weather.DailyModel) {
         let mappedDailyModel = MainScreen.map(model: dailyModel)
         dailyView.configure(with: mappedDailyModel)
-        weeklyView.configure(with: .init(delegate: self, dataSource: self))
+        weeklyTableView.configure(with: WeeklyTableView.Model(delegate: self, dataSource: self))
     }
 
 }

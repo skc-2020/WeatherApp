@@ -41,11 +41,9 @@ extension UIView {
 
 extension UIView {
 
-    static func makeTemperatureLabel(ofSize: CGFloat = 20,
-                                     weight: UIFont.Weight = .regular,
-                                     _ style: (() -> (UIView))? = nil) -> CustomLabel {
+    static func makeTemperatureLabel(with font: UIFont) -> CustomLabel {
         let label = CustomLabel()
-        label.font = UIFont.systemFont(ofSize: ofSize, weight: weight)
+        label.font = font
         label.textAlignment = .center
 
         return label

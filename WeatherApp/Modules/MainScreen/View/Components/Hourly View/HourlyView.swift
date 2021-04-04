@@ -9,10 +9,13 @@ import UIKit
 
 final class HourlyView: UICollectionView {
 
+    private let cellId = HourlyView.defaultReuseIdentifier + "Cell"
+
     // MARK: - Initializers
 
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
+        print(cellId)
 
         setupView()
     }
@@ -24,37 +27,22 @@ final class HourlyView: UICollectionView {
 
 }
 
-// MARK: - Configuration
-
-extension HourlyView: ViewConfiguration {
-
-    struct Model {
-        let delegate: UICollectionViewDelegate
-        let dataSource: UICollectionViewDataSource
-    }
-
-    func configure(with model: Model) {
-        delegate = model.delegate
-        dataSource = model.dataSource
-    }
-
-}
-
 // MARK: - Setup View
 
-extension HourlyView: UICollectionViewDelegateFlowLayout {
+private extension HourlyView {
 
     func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .clear
+        backgroundColor = UIColor(white: 1, alpha: 0)
 
         delegate = self
         dataSource = self
-        self.register(HourlyViewCell.self,
-                      forCellWithReuseIdentifier: Constants.cellIdentifier)
+        register(HourlyViewCell.self)
     }
 
 }
+
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 
 extension HourlyView: UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -63,23 +51,13 @@ extension HourlyView: UICollectionViewDelegate, UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let reusableCell = dequeueReusableCell(withReuseIdentifier: Constants.cellIdentifier, for: indexPath) as? HourlyViewCell
+        let reusableCell = dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? HourlyViewCell
 
         guard let cell = reusableCell else { return UICollectionViewCell() }
 
         cell.configure(with: Weather.HourlyModel.mock[indexPath.row])
 
         return cell
-    }
-
-}
-
-// MARK: - Constants
-
-private extension HourlyView {
-
-    struct Constants {
-        static let cellIdentifier = "HourlyViewCell"
     }
 
 }

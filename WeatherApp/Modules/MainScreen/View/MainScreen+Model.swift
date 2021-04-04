@@ -14,11 +14,19 @@ extension MainScreen {
     static func map(model: Model) -> Model {
         Model(locationName: model.locationName,
               cloudiness: model.cloudiness,
-              temperature: model.temperature + "°",
-              maxTemperature: "H: " + model.maxTemperature + "°",
-              minTemperature: "L: " + model.minTemperature + "°",
+              temperature: model.temperature + Degree.sign.rawValue,
+              maxTemperature: "H: " + model.maxTemperature + Degree.sign.rawValue,
+              minTemperature: "L: " + model.minTemperature + Degree.sign.rawValue,
               humidity: model.humidity,
               description: model.description)
+    }
+
+}
+
+private extension MainScreen {
+
+    enum Degree: String {
+        case sign = "°"
     }
 
 }

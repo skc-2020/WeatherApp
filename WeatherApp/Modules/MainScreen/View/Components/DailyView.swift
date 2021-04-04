@@ -29,13 +29,13 @@ final class DailyView: UIView {
 
     private let cloudinessLabel: CustomLabel = {
         let label = CustomLabel()
-        label.font = DesignSystem.Fonts.medium1
+        label.font = DesignSystem.Fonts.medium2
         label.textAlignment = .center
 
         return label
     }()
 
-    private let temperatureLabel = makeTemperatureLabel(ofSize: 90, weight: .thin)
+    private let temperatureLabel = makeTemperatureLabel(with: DesignSystem.Fonts.thinGiant)
 
     // MARK: Temperature Range StackView
 
@@ -48,9 +48,9 @@ final class DailyView: UIView {
         return stackView
     }()
 
-    private let minTemperatureLabel = makeTemperatureLabel()
+    private let minTemperatureLabel = makeTemperatureLabel(with: DesignSystem.Fonts.medium3)
 
-    private let maxTemperatureLabel = makeTemperatureLabel()
+    private let maxTemperatureLabel = makeTemperatureLabel(with: DesignSystem.Fonts.medium3)
 
     // MARK: - Initializers
 

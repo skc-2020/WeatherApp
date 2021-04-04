@@ -7,17 +7,17 @@
 
 import UIKit
 
-final class WeeklyTableViewCell: UITableViewCell {
+final class WeeklyTableViewCell: UITableViewCell, ReusableView {
 
     // MARK: - Private variables
 
-    private let minTemperatureLabel = makeTemperatureLabel()
+    private let minTemperatureLabel = makeTemperatureLabel(with: DesignSystem.Fonts.medium3)
 
-    private let maxTemperatureLabel = makeTemperatureLabel()
+    private let maxTemperatureLabel = makeTemperatureLabel(with: DesignSystem.Fonts.medium3)
 
     private let dayLabel: CustomLabel = {
         let label = CustomLabel()
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = DesignSystem.Fonts.medium3
         label.textAlignment = .left
 
         return label
@@ -33,7 +33,7 @@ final class WeeklyTableViewCell: UITableViewCell {
 
     private let humidityLabel: CustomLabel = {
         let label = CustomLabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = DesignSystem.Fonts.medium0
         label.textAlignment = .center
 
         return label
@@ -44,9 +44,11 @@ final class WeeklyTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        setupView()
         setupViewConstraints()
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -69,19 +71,28 @@ extension WeeklyTableViewCell {
 
 }
 
+// MARK: - Setup View
+
+private extension WeeklyTableViewCell {
+
+    func setupView() {
+        backgroundColor = UIColor(white: 0, alpha: 0)
+    }
+
+}
+
 // MARK: - Setup Layout
 
 private extension WeeklyTableViewCell {
 
     func setupViewConstraints() {
-        backgroundColor = .clear
         addSubviews(dayLabel,
                     cloudnessImage,
                     humidityLabel,
                     maxTemperatureLabel,
                     minTemperatureLabel)
 
-        layoutMargins = .init(top: 6, left: 0, bottom: -6, right: 0)
+        layoutMargins = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
 
         NSLayoutConstraint.activate([
             dayLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
