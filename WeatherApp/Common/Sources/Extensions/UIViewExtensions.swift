@@ -36,17 +36,3 @@ extension UIView {
     }
 
 }
-
-// MARK: - Make functions
-
-extension UIView {
-
-    static func makeTemperatureLabel(with font: UIFont) -> CustomLabel {
-        let label = CustomLabel()
-        label.font = font
-        label.textAlignment = .center
-
-        return label
-    }
-
-}

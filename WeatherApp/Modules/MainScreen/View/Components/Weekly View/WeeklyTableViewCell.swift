@@ -123,3 +123,17 @@ private extension WeeklyTableViewCell {
     }
 
 }
+
+// MARK: - Make functions
+
+extension WeeklyTableViewCell {
+
+    static func makeTemperatureLabel(with font: UIFont) -> CustomLabel {
+        let label = CustomLabel()
+        label.font = font
+        label.textAlignment = .center
+
+        return label
+    }
+
+}

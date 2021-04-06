@@ -7,7 +7,9 @@
 
 import UIKit
 
-final class HourlyViewCell: UICollectionViewCell, ReusableView {
+typealias ReusableCollection = UICollectionViewCell & ReusableView
+
+final class HourlyViewCell: ReusableCollection {
 
     // MARK: - Private variables
 
@@ -34,7 +36,6 @@ final class HourlyViewCell: UICollectionViewCell, ReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        setupView()
         setupViewConstraints()
     }
 
@@ -55,16 +56,6 @@ extension HourlyViewCell {
         hourLabel.text = model.hour
         cloudnessImage.image = UIImage(named: model.icon)
         temperatureLabel.text = model.temperature
-    }
-
-}
-
-// MARK: - Setup View
-
-private extension HourlyViewCell {
-
-    func setupView() {
-        backgroundColor = UIColor(white: 1, alpha: 0)
     }
 
 }
@@ -95,6 +86,20 @@ private extension HourlyViewCell {
             temperatureLabel.topAnchor.constraint(equalTo: cloudnessImage.bottomAnchor, constant: 4),
             temperatureLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+
+}
+
+// MARK: - Make functions
+
+extension HourlyViewCell {
+
+    static func makeTemperatureLabel(with font: UIFont) -> CustomLabel {
+        let label = CustomLabel()
+        label.font = font
+        label.textAlignment = .center
+
+        return label
     }
 
 }

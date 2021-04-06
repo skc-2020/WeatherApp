@@ -7,6 +7,8 @@
 
 // MARK: - Mapper
 
+import UIKit
+
 extension MainScreen {
 
     typealias Model = Weather.DailyModel
@@ -19,14 +21,6 @@ extension MainScreen {
               minTemperature: "L: " + model.minTemperature + Degree.sign.rawValue,
               humidity: model.humidity,
               description: model.description)
-    }
-
-}
-
-private extension MainScreen {
-
-    enum Degree: String {
-        case sign = "°"
     }
 
 }

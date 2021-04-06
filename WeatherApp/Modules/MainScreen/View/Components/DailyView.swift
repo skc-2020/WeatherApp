@@ -120,3 +120,17 @@ private extension DailyView {
     }
 
 }
+
+// MARK: - Make functions
+
+extension DailyView {
+
+    static func makeTemperatureLabel(with font: UIFont) -> CustomLabel {
+        let label = CustomLabel()
+        label.font = font
+        label.textAlignment = .center
+
+        return label
+    }
+
+}
