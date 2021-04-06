@@ -36,8 +36,6 @@ final class MainScreen: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        requestWeather()
-        
         setupView()
         setupViewConstraints()
     }
