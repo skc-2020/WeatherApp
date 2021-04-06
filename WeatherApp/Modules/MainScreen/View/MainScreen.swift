@@ -9,6 +9,8 @@ import UIKit
 
 final class MainScreen: BaseViewController {
 
+    private let cellId = WeeklyTableView.defaultReuseIdentifier + "Cell"
+
     // MARK: - External Dependencies
 
     var output: MainScreenOutput?
@@ -16,7 +18,17 @@ final class MainScreen: BaseViewController {
     // MARK: - Private Variables
 
     private let dailyView = DailyView()
+    private let hourlyView = HourlyView(
+        frame: .zero, collectionViewLayout: {
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            layout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width / 7, height: 110)
 
+            return layout
+        }()
+    )
+
+    private let weeklyTableView = WeeklyTableView()
     private let backgroundImage = UIImageView(image: DesignSystem.Images.sky)
 
     // MARK: - Override functions
@@ -25,6 +37,7 @@ final class MainScreen: BaseViewController {
         super.viewDidLoad()
 
         setupView()
+        setupViewConstraints()
     }
 
 }
@@ -34,19 +47,73 @@ final class MainScreen: BaseViewController {
 private extension MainScreen {
 
     func setupView() {
-        view.addSubviews(backgroundImage, dailyView)
-        dailyView.pinToSuperview()
+        view.addSubviews(
+            backgroundImage,
+            dailyView,
+            hourlyView,
+            weeklyTableView
+        )
     }
 
 }
 
-// MARK: - MainScreen Input
+// MARK: - Setup Layout
+
+private extension MainScreen {
+
+    func setupViewConstraints() {
+        NSLayoutConstraint.activate([
+            dailyView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            dailyView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            dailyView.topAnchor.constraint(equalTo: view.topAnchor),
+            dailyView.heightAnchor.constraint(equalToConstant: 410),
+
+            hourlyView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            hourlyView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            hourlyView.topAnchor.constraint(equalTo: dailyView.bottomAnchor),
+            hourlyView.heightAnchor.constraint(equalToConstant: 120),
+
+            weeklyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            weeklyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            weeklyTableView.topAnchor.constraint(equalTo: hourlyView.bottomAnchor),
+            weeklyTableView.heightAnchor.constraint(equalToConstant: 600)
+        ])
+    }
+
+}
+
+// MARK: - DataSource & Delegate
+
+extension MainScreen: UITableViewDataSource, UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        Weather.WeeklyModel.mock.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+         let reusableCell = tableView.dequeueReusableCell(
+            withIdentifier: cellId,
+            for: indexPath
+        ) as? WeeklyTableViewCell
+
+        guard let cell = reusableCell else { return UITableViewCell() }
+
+        cell.configure(with: Weather.WeeklyModel.mock[indexPath.row])
+        tableView.separatorColor = UIColor.clear
+
+        return cell
+    }
+
+}
+
+// MARK: - MainScreenInput
 
 extension MainScreen: MainScreenInput {
 
-    func configureMainScreen(with model: Weather.DailyModel) {
-        let mappedModel = MainScreen.map(model: model)
-        dailyView.configure(with: mappedModel)
+    func configureMainScreen(with dailyModel: Weather.DailyModel) {
+        let mappedDailyModel = MainScreen.map(model: dailyModel)
+        dailyView.configure(with: mappedDailyModel)
+        weeklyTableView.configure(with: WeeklyTableView.Model(delegate: self, dataSource: self))
     }
 
 }

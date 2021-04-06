@@ -29,19 +29,13 @@ final class DailyView: UIView {
 
     private let cloudinessLabel: CustomLabel = {
         let label = CustomLabel()
-        label.font = DesignSystem.Fonts.medium1
+        label.font = DesignSystem.Fonts.medium2
         label.textAlignment = .center
 
         return label
     }()
 
-    private let temperatureLabel: CustomLabel = {
-        let label = CustomLabel()
-        label.font = DesignSystem.Fonts.lightGiant
-        label.textAlignment = .center
-
-        return label
-    }()
+    private let temperatureLabel = makeTemperatureLabel(with: DesignSystem.Fonts.thinGiant)
 
     // MARK: Temperature Range StackView
 
@@ -54,9 +48,9 @@ final class DailyView: UIView {
         return stackView
     }()
 
-    private let minTemperatureLabel = makeTemperaratureLabel()
+    private let minTemperatureLabel = makeTemperatureLabel(with: DesignSystem.Fonts.medium3)
 
-    private let maxTemperatureLabel = makeTemperaratureLabel()
+    private let maxTemperatureLabel = makeTemperatureLabel(with: DesignSystem.Fonts.medium3)
 
     // MARK: - Initializers
 
@@ -120,7 +114,7 @@ private extension DailyView {
         translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 190),
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 120),
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
@@ -129,11 +123,12 @@ private extension DailyView {
 
 // MARK: - Make functions
 
-private extension DailyView {
+extension DailyView {
 
-    static func makeTemperaratureLabel() -> CustomLabel {
+    static func makeTemperatureLabel(with font: UIFont) -> CustomLabel {
         let label = CustomLabel()
-        label.font = DesignSystem.Fonts.medium2
+        label.font = font
+        label.textAlignment = .center
 
         return label
     }
