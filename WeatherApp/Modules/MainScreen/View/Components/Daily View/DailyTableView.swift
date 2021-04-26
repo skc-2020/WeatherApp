@@ -7,14 +7,14 @@
 
 import UIKit
 
-final class WeeklyTableView: UITableView {
+final class DailyTableView: UITableView {
 
     // MARK: - Initializers
 
     override init(frame: CGRect, style: Style) {
         super.init(frame: frame, style: style  )
 
-        setupTableView()
+        setupView()
     }
 
     @available(*, unavailable)
@@ -26,10 +26,10 @@ final class WeeklyTableView: UITableView {
 
 // MARK: - Configuration
 
-extension WeeklyTableView: ViewConfiguration {
+extension DailyTableView: ViewConfiguration {
 
     struct Model {
-        let delegate: UITableViewDelegate
+        weak var delegate: UITableViewDelegate?
         let dataSource: UITableViewDataSource
     }
 
@@ -42,14 +42,14 @@ extension WeeklyTableView: ViewConfiguration {
 
 // MARK: - Setup View
 
-private extension WeeklyTableView {
+private extension DailyTableView {
 
-    func setupTableView() {
+    func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .clear
-        rowHeight = 40
 
-        register(WeeklyTableViewCell.self)
+        rowHeight = 40
+        register(DailyTableViewCell.self)
     }
 
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DailyView: UIView {
+final class CurrentWeatherView: UIView {
 
     // MARK: - Private variables
 
@@ -27,7 +27,7 @@ final class DailyView: UIView {
         return label
     }()
 
-    private let cloudinessLabel: CustomLabel = {
+    private let cloudsLabel: CustomLabel = {
         let label = CustomLabel()
         label.font = DesignSystem.Fonts.medium2
         label.textAlignment = .center
@@ -70,28 +70,30 @@ final class DailyView: UIView {
 
 // MARK: - Configuration
 
-extension DailyView: ViewConfiguration {
+extension CurrentWeatherView: ViewConfiguration {
 
-    typealias Model = Weather.DailyModel
+    typealias Model = ViewModel
 
     func configure(with model: Model) {
+        guard let currentDay = model.daily?.first else { return }
+
         locationNameLabel.text = model.locationName
-        cloudinessLabel.text = model.cloudiness
-        temperatureLabel.text = model.temperature
-        maxTemperatureLabel.text = model.maxTemperature
-        minTemperatureLabel.text = model.minTemperature
+        cloudsLabel.text = String(describing: currentDay.clouds ?? 0)
+        temperatureLabel.text = String(describing: currentDay.temperature?.day ?? "")
+        maxTemperatureLabel.text = String(describing: currentDay.temperature?.max ?? "")
+        minTemperatureLabel.text = String(describing: currentDay.temperature?.min ?? "")
     }
 
 }
 
 // MARK: - Setup View
 
-private extension DailyView {
+private extension CurrentWeatherView {
 
     func setupView() {
         stackView.addArrangedSubview(
             locationNameLabel,
-            cloudinessLabel,
+            cloudsLabel,
             temperatureLabel,
             temperatureRangeStackView
         )
@@ -108,7 +110,7 @@ private extension DailyView {
 
 // MARK: - Setup Constraints
 
-private extension DailyView {
+private extension CurrentWeatherView {
 
     func setupStackViewLayout() {
         translatesAutoresizingMaskIntoConstraints = false
@@ -121,7 +123,7 @@ private extension DailyView {
 
 // MARK: - Make functions
 
-extension DailyView {
+private extension CurrentWeatherView {
 
     static func makeTemperatureLabel(with font: UIFont) -> CustomLabel {
         let label = CustomLabel()

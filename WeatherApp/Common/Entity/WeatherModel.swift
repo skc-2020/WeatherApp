@@ -2,103 +2,142 @@
 //  WeatherModel.swift
 //  WeatherApp
 //
-//  Created by AndUser on 13.03.2021.
+//  Created by AndUser on 07.04.2021.
 //
 
-struct Weather {
+// MARK: - Weather
 
-    struct DailyModel {
+struct Weather: Codable {
 
-        let locationName: String
-        let cloudiness: String
-        let temperature: String
-        let maxTemperature: String
-        let minTemperature: String
-        let humidity: String?
-        let description: String?
+    var lat, lon: Double?
+    var timezone: String?
+    var timezoneOffset: Int?
+    var current: Current?
+    var daily: [Daily]?
+    var hourly: [Current]?
 
-        static let mock = Self(locationName: "Kyiv",
-                               cloudiness: "Mostly cloudy",
-                               temperature: "-4",
-                               maxTemperature: "3",
-                               minTemperature: "-9",
-                               humidity: "",
-                               description: "")
+    enum CodingKeys: String, CodingKey {
+        case lat, lon, timezone
+        case timezoneOffset = "timezone_offset"
+        case current, daily, hourly
+    }
+
+}
+
+// MARK: - Current
+
+struct Current: Codable {
+
+    let dt: Int
+    var sunrise, sunset: Int?
+    let temp, feelsLike: Double
+    let pressure, humidity: Int
+    let dewPoint, uvi: Double
+    let clouds, visibility: Int
+    let windSpeed: Double
+    let windDeg: Int
+    let weather: [WeatherElement]
+    var rain: Rain?
+    var windGust, pop: Double?
+    var snow: Rain?
+
+    enum CodingKeys: String, CodingKey {
+        case dt, sunrise, sunset, temp
+        case feelsLike = "feels_like"
+        case pressure, humidity
+        case dewPoint = "dew_point"
+        case uvi, clouds, visibility
+        case windSpeed = "wind_speed"
+        case windDeg = "wind_deg"
+        case weather, rain
+        case windGust = "wind_gust"
+        case pop, snow
+    }
+
+}
+
+// MARK: - Rain
+
+struct Rain: Codable {
+
+    let the1H: Double
+
+    enum CodingKeys: String, CodingKey {
+        case the1H = "1h"
+    }
+
+}
+
+// MARK: - WeatherElement
+
+struct WeatherElement: Codable {
+
+    let id: Int
+    var main: Main?
+    let weatherDescription, icon: String
+
+    enum CodingKeys: String, CodingKey {
+        case id, main
+        case weatherDescription = "description"
+        case icon
+    }
+
+}
+
+enum Main: String, Codable {
+
+    case clear = "Clear"
+    case clouds = "Clouds"
+    case rain = "Rain"
+    case snow = "Snow"
+    case mist = "Mist"
+    case fog = "Fog"
+
+}
+
+// MARK: - Daily
+
+struct Daily: Codable {
+
+    var dt, sunrise, sunset: Int?
+    let temp: Temp
+    var feelsLike: FeelsLike?
+    var pressure, humidity: Int?
+    var dewPoint, windSpeed: Double?
+    var windDeg: Int?
+    var weather: [WeatherElement]?
+    let clouds: Int
+    var pop: Double?
+    var rain, snow: Double?
+    var uvi: Double?
+
+    enum CodingKeys: String, CodingKey {
+
+        case dt, sunrise, sunset, temp
+        case feelsLike = "feels_like"
+        case pressure, humidity
+        case dewPoint = "dew_point"
+        case windSpeed = "wind_speed"
+        case windDeg = "wind_deg"
+        case weather, clouds, pop, rain, snow, uvi
 
     }
 
-    struct HourlyModel {
+}
 
-        let hour: String
-        let icon: String
-        let temperature: String
+// MARK: - FeelsLike
 
-        static let mock = [
-            Self(hour: "Now", icon: "sunny", temperature: "11"),
-            Self(hour: "16", icon: "sunny", temperature: "11"),
-            Self(hour: "17", icon: "cloudy", temperature: "12"),
-            Self(hour: "18", icon: "cloudy", temperature: "12"),
-            Self(hour: "19", icon: "cloudy", temperature: "13"),
-            Self(hour: "20", icon: "sunny", temperature: "13")
-        ]
-    }
+struct FeelsLike: Codable {
 
-    struct WeeklyModel {
+    let day, night, eve, morn: Double
 
-        let dayOfWeek: String
-        let icon: String
-        let maxTemperature: String
-        let minTemperature: String
-        let humidity: String
+}
 
-        static let mock = [
-            Self(dayOfWeek: "Monday",
-                 icon: "cloudy",
-                 maxTemperature: "5",
-                 minTemperature: "-9",
-                 humidity: "65%"),
-            Self(dayOfWeek: "Tuesday",
-                 icon: "sunny",
-                 maxTemperature: "7",
-                 minTemperature: "-8",
-                 humidity: "50%"),
-            Self(dayOfWeek: "Wednesday",
-                 icon: "rainy",
-                 maxTemperature: "5",
-                 minTemperature: "-9",
-                 humidity: "65%"),
-            Self(dayOfWeek: "Thursday",
-                 icon: "cloudy",
-                 maxTemperature: "5",
-                 minTemperature: "-9",
-                 humidity: "65%"),
-            Self(dayOfWeek: "Friday",
-                 icon: "sunny",
-                 maxTemperature: "7",
-                 minTemperature: "-8",
-                 humidity: "50%"),
-            Self(dayOfWeek: "Saturday",
-                 icon: "rainy",
-                 maxTemperature: "5",
-                 minTemperature: "-9",
-                 humidity: "65%"),
-            Self(dayOfWeek: "Sunday",
-                 icon: "sunny",
-                 maxTemperature: "5",
-                 minTemperature: "-9",
-                 humidity: "33%"),
-            Self(dayOfWeek: "Monday",
-                 icon: "cloudy",
-                 maxTemperature: "5",
-                 minTemperature: "-9",
-                 humidity: "65%"),
-            Self(dayOfWeek: "Tuesday",
-                 icon: "cloudy",
-                 maxTemperature: "7",
-                 minTemperature: "-8",
-                 humidity: "50%")
-        ]
+// MARK: - Temp
 
-    }
+struct Temp: Codable {
+
+    let day, min, max: Double
+    var night, eve, morn: Double?
 
 }

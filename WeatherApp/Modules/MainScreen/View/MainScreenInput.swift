@@ -8,6 +8,6 @@
 /// Describes the contract with the view.
 protocol MainScreenInput: AnyObject {
 
-    func configureMainScreen(with dailyModel: Weather.DailyModel)
+    func configureMainScreen(with dailyModel: Weather)
 
 }
