@@ -92,34 +92,32 @@ private extension WeeklyTableViewCell {
                     maxTemperatureLabel,
                     minTemperatureLabel)
 
-        layoutMargins = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+        layoutMargins = UIEdgeInsets(top: 6, left: 0, bottom: 6, right: 0)
 
-        NSLayoutConstraint.activate([
-            dayLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
-            dayLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
-            dayLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            dayLabel.widthAnchor.constraint(equalToConstant: 150),
+        dayLabel.pinTopEdge(to: .layout(layoutMarginsGuide), attribute: .top)
+        dayLabel.pinBottomEdge(to: .layout(layoutMarginsGuide), attribute: .bottom)
+        dayLabel.pinLeadingEdge(to: .view(self), attribute: .leading, constant: 20)
+        dayLabel.width(equalTo: 150)
 
-            cloudnessImage.topAnchor.constraint(equalTo: topAnchor, constant: 3),
-            cloudnessImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -3),
-            cloudnessImage.leadingAnchor.constraint(equalTo: dayLabel.trailingAnchor, constant: 6),
-            cloudnessImage.widthAnchor.constraint(equalToConstant: 42),
+        cloudnessImage.pinTopEdge(to: .view(self), attribute: .top, constant: 3)
+        cloudnessImage.pinBottomEdge(to: .view(self), attribute: .bottom, constant: -3)
+        cloudnessImage.pinLeadingEdge(to: .view(dayLabel), attribute: .trailing, constant: 6)
+        cloudnessImage.width(equalTo: 42)
 
-            humidityLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
-            humidityLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
-            humidityLabel.leadingAnchor.constraint(equalTo: cloudnessImage.trailingAnchor, constant: 6),
-            humidityLabel.widthAnchor.constraint(equalToConstant: 40),
+        humidityLabel.pinTopEdge(to: .view(self), attribute: .top)
+        humidityLabel.pinBottomEdge(to: .view(self), attribute: .bottom)
+        humidityLabel.pinLeadingEdge(to: .view(cloudnessImage), attribute: .trailing, constant: 6)
+        humidityLabel.width(equalTo: 40)
 
-            maxTemperatureLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
-            maxTemperatureLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
-            maxTemperatureLabel.leadingAnchor.constraint(equalTo: humidityLabel.trailingAnchor, constant: 50),
-            maxTemperatureLabel.widthAnchor.constraint(equalToConstant: 30),
+        maxTemperatureLabel.pinTopEdge(to: .layout(layoutMarginsGuide), attribute: .top)
+        maxTemperatureLabel.pinBottomEdge(to: .layout(layoutMarginsGuide), attribute: .bottom)
+        maxTemperatureLabel.pinLeadingEdge(to: .view(humidityLabel), attribute: .trailing, constant: 50)
+        maxTemperatureLabel.width(equalTo: 30)
 
-            minTemperatureLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
-            minTemperatureLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
-            minTemperatureLabel.leadingAnchor.constraint(equalTo: maxTemperatureLabel.trailingAnchor, constant: 10),
-            minTemperatureLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
-        ])
+        minTemperatureLabel.pinTopEdge(to: .layout(layoutMarginsGuide), attribute: .top)
+        minTemperatureLabel.pinBottomEdge(to: .layout(layoutMarginsGuide), attribute: .bottom)
+        minTemperatureLabel.pinLeadingEdge(to: .view(maxTemperatureLabel), attribute: .trailing, constant: 10)
+        minTemperatureLabel.pinTrailingEdge(to: .view(self), attribute: .trailing, constant: -15)
     }
 
 }

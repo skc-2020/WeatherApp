@@ -62,22 +62,20 @@ private extension MainScreen {
 private extension MainScreen {
 
     func setupViewConstraints() {
-        NSLayoutConstraint.activate([
-            dailyView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            dailyView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            dailyView.topAnchor.constraint(equalTo: view.topAnchor),
-            dailyView.heightAnchor.constraint(equalToConstant: 410),
+        dailyView.pinLeadingEdge(to: .view(view), attribute: .leading)
+        dailyView.pinTrailingEdge(to: .view(view), attribute: .trailing)
+        dailyView.pinTopEdge(to: .view(view), attribute: .top)
+        dailyView.height(equalTo: 410)
 
-            hourlyView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            hourlyView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            hourlyView.topAnchor.constraint(equalTo: dailyView.bottomAnchor),
-            hourlyView.heightAnchor.constraint(equalToConstant: 120),
+        hourlyView.pinLeadingEdge(to: .view(view), attribute: .leading, constant: 15)
+        hourlyView.pinTrailingEdge(to: .view(view), attribute: .trailing)
+        hourlyView.pinTopEdge(to: .view(dailyView), attribute: .bottom)
+        hourlyView.height(equalTo: 120)
 
-            weeklyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            weeklyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            weeklyTableView.topAnchor.constraint(equalTo: hourlyView.bottomAnchor),
-            weeklyTableView.heightAnchor.constraint(equalToConstant: 600)
-        ])
+        weeklyTableView.pinLeadingEdge(to: .view(view), attribute: .leading, constant: 10)
+        weeklyTableView.pinTrailingEdge(to: .view(view), attribute: .trailing)
+        weeklyTableView.pinTopEdge(to: .view(hourlyView), attribute: .bottom)
+        weeklyTableView.height(equalTo: 600)
     }
 
 }

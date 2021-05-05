@@ -69,23 +69,23 @@ private extension HourlyViewCell {
                     cloudnessImage,
                     temperatureLabel)
 
-        NSLayoutConstraint.activate([
-            hourLabel.leadingAnchor.constraint(equalTo:  leadingAnchor, constant: 10),
-            hourLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            hourLabel.topAnchor.constraint(equalTo: topAnchor, constant: 4),
-            hourLabel.heightAnchor.constraint(equalToConstant: 34),
+        layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
 
-            cloudnessImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            cloudnessImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            cloudnessImage.topAnchor.constraint(equalTo: hourLabel.bottomAnchor, constant: 4),
-            cloudnessImage.heightAnchor.constraint(equalToConstant: 37),
-            cloudnessImage.widthAnchor.constraint(equalTo: cloudnessImage.heightAnchor),
+        hourLabel.pinLeadingEdge(to: .layout(layoutMarginsGuide), attribute: .leading)
+        hourLabel.pinTrailingEdge(to: .layout(layoutMarginsGuide), attribute: .trailing)
+        hourLabel.pinTopEdge(to: .view(self), attribute: .top, constant: 4)
+        hourLabel.height(equalTo: 34)
 
-            temperatureLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            temperatureLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            temperatureLabel.topAnchor.constraint(equalTo: cloudnessImage.bottomAnchor, constant: 4),
-            temperatureLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
+        cloudnessImage.pinLeadingEdge(to: .layout(layoutMarginsGuide), attribute: .leading)
+        cloudnessImage.pinTrailingEdge(to: .layout(layoutMarginsGuide), attribute: .trailing)
+        cloudnessImage.pinTopEdge(to: .view(hourLabel), attribute: .bottom, constant: 4)
+        cloudnessImage.height(equalTo: 37)
+        cloudnessImage.width(equalTo: 37)
+
+        temperatureLabel.pinLeadingEdge(to: .layout(layoutMarginsGuide), attribute: .leading)
+        temperatureLabel.pinTrailingEdge(to: .layout(layoutMarginsGuide), attribute: .trailing)
+        temperatureLabel.pinTopEdge(to: .view(cloudnessImage), attribute: .bottom, constant: 4)
+        temperatureLabel.pinBottomEdge(to: .view(self), attribute: .bottom)
     }
 
 }
