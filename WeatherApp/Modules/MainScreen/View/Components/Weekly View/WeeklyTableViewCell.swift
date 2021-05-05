@@ -92,30 +92,32 @@ private extension WeeklyTableViewCell {
                     maxTemperatureLabel,
                     minTemperatureLabel)
 
-        dayLabel.pinTop(to: self, attribute: .top, constant: 6)
-        dayLabel.pinBottom(to: self, attribute: .bottom, constant: -6)
-        dayLabel.pinLeadingEdge(to: self, attribute: .leading, constant: 20)
+        layoutMargins = UIEdgeInsets(top: 6, left: 0, bottom: 6, right: 0)
+
+        dayLabel.pinTopEdge(to: .layout(layoutMarginsGuide), attribute: .top)
+        dayLabel.pinBottomEdge(to: .layout(layoutMarginsGuide), attribute: .bottom)
+        dayLabel.pinLeadingEdge(to: .view(self), attribute: .leading, constant: 20)
         dayLabel.width(equalTo: 150)
 
-        cloudnessImage.pinTop(to: self, attribute: .top, constant: 3)
-        cloudnessImage.pinBottom(to: self, attribute: .bottom, constant: -3)
-        cloudnessImage.pinLeadingEdge(to: dayLabel, attribute: .trailing, constant: 6)
+        cloudnessImage.pinTopEdge(to: .view(self), attribute: .top, constant: 3)
+        cloudnessImage.pinBottomEdge(to: .view(self), attribute: .bottom, constant: -3)
+        cloudnessImage.pinLeadingEdge(to: .view(dayLabel), attribute: .trailing, constant: 6)
         cloudnessImage.width(equalTo: 42)
 
-        humidityLabel.pinTop(to: self, attribute: .top)
-        humidityLabel.pinBottom(to: self, attribute: .bottom)
-        humidityLabel.pinLeadingEdge(to: cloudnessImage, attribute: .trailing, constant: 6)
+        humidityLabel.pinTopEdge(to: .view(self), attribute: .top)
+        humidityLabel.pinBottomEdge(to: .view(self), attribute: .bottom)
+        humidityLabel.pinLeadingEdge(to: .view(cloudnessImage), attribute: .trailing, constant: 6)
         humidityLabel.width(equalTo: 40)
 
-        maxTemperatureLabel.pinTop(to: self, attribute: .top, constant: 6)
-        maxTemperatureLabel.pinBottom(to: self, attribute: .bottom, constant: -6)
-        maxTemperatureLabel.pinLeadingEdge(to: humidityLabel, attribute: .trailing, constant: 50)
+        maxTemperatureLabel.pinTopEdge(to: .layout(layoutMarginsGuide), attribute: .top)
+        maxTemperatureLabel.pinBottomEdge(to: .layout(layoutMarginsGuide), attribute: .bottom)
+        maxTemperatureLabel.pinLeadingEdge(to: .view(humidityLabel), attribute: .trailing, constant: 50)
         maxTemperatureLabel.width(equalTo: 30)
 
-        minTemperatureLabel.pinTop(to: self, attribute: .top, constant: 6)
-        minTemperatureLabel.pinBottom(to: self, attribute: .bottom, constant: -6)
-        minTemperatureLabel.pinLeadingEdge(to: maxTemperatureLabel, attribute: .trailing, constant: 10)
-        minTemperatureLabel.pinTrailingEdge(to: self, attribute: .trailing, constant: -15)
+        minTemperatureLabel.pinTopEdge(to: .layout(layoutMarginsGuide), attribute: .top)
+        minTemperatureLabel.pinBottomEdge(to: .layout(layoutMarginsGuide), attribute: .bottom)
+        minTemperatureLabel.pinLeadingEdge(to: .view(maxTemperatureLabel), attribute: .trailing, constant: 10)
+        minTemperatureLabel.pinTrailingEdge(to: .view(self), attribute: .trailing, constant: -15)
     }
 
 }

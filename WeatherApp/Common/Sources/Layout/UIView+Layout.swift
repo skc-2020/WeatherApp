@@ -7,90 +7,145 @@
 
 import UIKit
 
+enum View {
+
+    case view(UIView)
+    case layout(UILayoutGuide)
+
+    var item: Any {
+        switch self {
+        case .view(let view):
+            return view
+        case .layout(let layout):
+            return layout
+        }
+    }
+
+}
+
 extension UIView {
 
-    func pinTop(
-        to: UIView,
+    @discardableResult
+    func pinTopEdge(
+        to: View,
         attribute: NSLayoutConstraint.Attribute,
         relation: NSLayoutConstraint.Relation = .equal,
         constant: CGFloat = 0
-        ) {
+        ) -> NSLayoutConstraint {
         NSLayoutConstraint(
             item: self,
             attribute: .top,
             relatedBy: relation,
-            toItem: to,
+            toItem: to.item,
             attribute: attribute,
             multiplier: 1,
             constant: constant
-        ).isActive = true
+        ).isActivating()
     }
 
-    func pinBottom(
-        to: UIView,
+    @discardableResult
+    func pinBottomEdge(
+        to: View,
         attribute: NSLayoutConstraint.Attribute,
         relation: NSLayoutConstraint.Relation = .equal,
         constant: CGFloat = 0
-        ) {
+        ) -> NSLayoutConstraint {
         NSLayoutConstraint(
             item: self,
             attribute: .bottom,
             relatedBy: relation,
-            toItem: to,
+            toItem: to.item,
             attribute: attribute,
             multiplier: 1,
             constant: constant
-        ).isActive = true
+        ).isActivating()
     }
 
+    @discardableResult
     func pinLeadingEdge(
-        to: UIView,
+        to: View,
         attribute: NSLayoutConstraint.Attribute,
         relation: NSLayoutConstraint.Relation = .equal,
         constant: CGFloat = 0
-        ) {
+        ) -> NSLayoutConstraint {
         NSLayoutConstraint(
             item: self,
             attribute: .leading,
             relatedBy: relation,
-            toItem: to,
+            toItem: to.item,
             attribute: attribute,
             multiplier: 1,
             constant: constant
-        ).isActive = true
+        ).isActivating()
     }
 
+    @discardableResult
     func pinTrailingEdge(
-        to: UIView,
+        to: View,
         attribute: NSLayoutConstraint.Attribute,
         relation: NSLayoutConstraint.Relation = .equal,
         constant: CGFloat = 0
-        ) {
+        ) -> NSLayoutConstraint {
         NSLayoutConstraint(
             item: self,
             attribute: .trailing,
             relatedBy: relation,
-            toItem: to,
+            toItem: to.item,
             attribute: attribute,
             multiplier: 1,
             constant: constant
-        ).isActive = true
+        ).isActivating()
     }
 
-    func height(equalTo constant: CGFloat, multiplier: CGFloat = 1) {
-        self.heightAnchor.constraint(equalToConstant: constant).isActive = true
+    @discardableResult
+    func height(equalTo constant: CGFloat, multiplier: CGFloat = 1) -> NSLayoutConstraint {
+        heightAnchor
+            .constraint(equalToConstant: constant)
+            .isActivating()
     }
 
-    func width(equalTo constant: CGFloat, multiplier: CGFloat = 1) {
-        self.widthAnchor.constraint(equalToConstant: constant).isActive = true
+    @discardableResult
+    func width(equalTo constant: CGFloat, multiplier: CGFloat = 1) -> NSLayoutConstraint {
+        widthAnchor
+            .constraint(equalToConstant: constant)
+            .isActivating()
     }
 
-    func centerX(equalsCenter view: UIView, constant: CGFloat = 0) {
-        self.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: constant).isActive = true
+    @discardableResult
+    func centerX(equalsToCenterIn view: UIView, constant: CGFloat = 0) -> NSLayoutConstraint {
+        centerXAnchor
+            .constraint(equalTo: view.centerXAnchor, constant: constant)
+            .isActivating()
     }
 
-    func centerY(equalsCenter view: UIView, constant: CGFloat = 0) {
-        self.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: constant).isActive = true
+    @discardableResult
+    func centerX(equalsToCenterIn layout: UILayoutGuide, constant: CGFloat = 0) -> NSLayoutConstraint {
+        centerXAnchor
+            .constraint(equalTo: layout.centerXAnchor, constant: constant)
+            .isActivating()
+    }
+
+    @discardableResult
+    func centerY(equalsToCenterIn view: UIView, constant: CGFloat = 0) -> NSLayoutConstraint {
+        centerYAnchor
+            .constraint(equalTo: view.centerYAnchor, constant: constant)
+            .isActivating()
+    }
+
+    @discardableResult
+    func centerY(equalsToCenterIn layout: UILayoutGuide, constant: CGFloat = 0) -> NSLayoutConstraint {
+        centerYAnchor
+            .constraint(equalTo: layout.centerYAnchor, constant: constant)
+            .isActivating()
+    }
+
+}
+
+extension NSLayoutConstraint {
+
+    func isActivating() -> Self {
+        self.isActive = true
+        return self
     }
 
 }

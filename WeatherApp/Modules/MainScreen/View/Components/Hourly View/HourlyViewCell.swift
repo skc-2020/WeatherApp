@@ -69,21 +69,23 @@ private extension HourlyViewCell {
                     cloudnessImage,
                     temperatureLabel)
 
-        hourLabel.pinLeadingEdge(to: self, attribute: .leading, constant: 10)
-        hourLabel.pinTrailingEdge(to: self, attribute: .trailing, constant: -10)
-        hourLabel.pinTop(to: self, attribute: .top, constant: 4)
+        layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+
+        hourLabel.pinLeadingEdge(to: .layout(layoutMarginsGuide), attribute: .leading)
+        hourLabel.pinTrailingEdge(to: .layout(layoutMarginsGuide), attribute: .trailing)
+        hourLabel.pinTopEdge(to: .view(self), attribute: .top, constant: 4)
         hourLabel.height(equalTo: 34)
 
-        cloudnessImage.pinLeadingEdge(to: self, attribute: .leading, constant: 10)
-        cloudnessImage.pinTrailingEdge(to: self, attribute: .trailing, constant: -10)
-        cloudnessImage.pinTop(to: hourLabel, attribute: .bottom, constant: 4)
+        cloudnessImage.pinLeadingEdge(to: .layout(layoutMarginsGuide), attribute: .leading)
+        cloudnessImage.pinTrailingEdge(to: .layout(layoutMarginsGuide), attribute: .trailing)
+        cloudnessImage.pinTopEdge(to: .view(hourLabel), attribute: .bottom, constant: 4)
         cloudnessImage.height(equalTo: 37)
         cloudnessImage.width(equalTo: 37)
 
-        temperatureLabel.pinLeadingEdge(to: self, attribute: .leading, constant: 10)
-        temperatureLabel.pinTrailingEdge(to: self, attribute: .trailing, constant: -10)
-        temperatureLabel.pinTop(to: cloudnessImage, attribute: .bottom, constant: 4)
-        temperatureLabel.pinBottom(to: self, attribute: .bottom)
+        temperatureLabel.pinLeadingEdge(to: .layout(layoutMarginsGuide), attribute: .leading)
+        temperatureLabel.pinTrailingEdge(to: .layout(layoutMarginsGuide), attribute: .trailing)
+        temperatureLabel.pinTopEdge(to: .view(cloudnessImage), attribute: .bottom, constant: 4)
+        temperatureLabel.pinBottomEdge(to: .view(self), attribute: .bottom)
     }
 
 }

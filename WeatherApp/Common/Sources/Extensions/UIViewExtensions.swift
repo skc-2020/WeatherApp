@@ -27,11 +27,10 @@ extension UIView {
     func pinToSuperview() {
         guard let superview = superview else { return }
 
-        self.pinTop(to: superview, attribute: .top)
-        self.pinBottom(to: superview, attribute: .bottom)
-        self.pinLeadingEdge(to: superview, attribute: .leading)
-        self.pinTrailingEdge(to: superview, attribute: .trailing)
-
+        pinTopEdge(to: .view(superview), attribute: .top)
+        pinBottomEdge(to: .view(superview), attribute: .bottom)
+        pinLeadingEdge(to: .view(superview), attribute: .leading)
+        pinTrailingEdge(to: .view(superview), attribute: .trailing)
     }
 
 }

@@ -113,8 +113,8 @@ private extension DailyView {
     func setupStackViewLayout() {
         translatesAutoresizingMaskIntoConstraints = false
 
-        stackView.pinTop(to: self, attribute: .top, constant: 120)
-        stackView.centerX(equalsCenter: self)
+        stackView.pinTopEdge(to: .view(self), attribute: .top, constant: 120)
+        stackView.centerX(equalsToCenterIn: self)
     }
 
 }

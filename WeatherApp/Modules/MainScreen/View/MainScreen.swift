@@ -62,19 +62,19 @@ private extension MainScreen {
 private extension MainScreen {
 
     func setupViewConstraints() {
-        dailyView.pinLeadingEdge(to: view, attribute: .leading)
-        dailyView.pinTrailingEdge(to: view, attribute: .trailing)
-        dailyView.pinTop(to: view, attribute: .top)
+        dailyView.pinLeadingEdge(to: .view(view), attribute: .leading)
+        dailyView.pinTrailingEdge(to: .view(view), attribute: .trailing)
+        dailyView.pinTopEdge(to: .view(view), attribute: .top)
         dailyView.height(equalTo: 410)
 
-        hourlyView.pinLeadingEdge(to: view, attribute: .leading, constant: 15)
-        hourlyView.pinTrailingEdge(to: view, attribute: .trailing)
-        hourlyView.pinTop(to: dailyView, attribute: .bottom)
+        hourlyView.pinLeadingEdge(to: .view(view), attribute: .leading, constant: 15)
+        hourlyView.pinTrailingEdge(to: .view(view), attribute: .trailing)
+        hourlyView.pinTopEdge(to: .view(dailyView), attribute: .bottom)
         hourlyView.height(equalTo: 120)
 
-        weeklyTableView.pinLeadingEdge(to: view, attribute: .leading, constant: 10)
-        weeklyTableView.pinTrailingEdge(to: view, attribute: .trailing)
-        weeklyTableView.pinTop(to: hourlyView, attribute: .bottom)
+        weeklyTableView.pinLeadingEdge(to: .view(view), attribute: .leading, constant: 10)
+        weeklyTableView.pinTrailingEdge(to: .view(view), attribute: .trailing)
+        weeklyTableView.pinTopEdge(to: .view(hourlyView), attribute: .bottom)
         weeklyTableView.height(equalTo: 600)
     }
 
