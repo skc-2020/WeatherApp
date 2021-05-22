@@ -11,8 +11,7 @@ final class MainScreen: BaseViewController {
 
     // MARK: - External Dependencies
 
-    var output: MainScreenOutput?
-    var presenter: MainScreenPresenter!
+    var output: MainScreenOutput!
 
     // MARK: - Private Variables
 
@@ -90,7 +89,7 @@ private extension MainScreen {
 extension MainScreen: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.getDailyModel().count
+        output.getDailyModel().count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -100,7 +99,7 @@ extension MainScreen: UITableViewDataSource, UITableViewDelegate {
 
         guard let cell = reusableCell else { return UITableViewCell() }
 
-        cell.configure(with: presenter.getDailyModel()[indexPath.row])
+        cell.configure(with: output.getDailyModel()[indexPath.row])
 
         tableView.separatorColor = UIColor.clear
 
@@ -114,7 +113,7 @@ extension MainScreen: UITableViewDataSource, UITableViewDelegate {
 extension MainScreen: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        presenter.getHourlyModel().count
+        output.getHourlyModel().count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -124,7 +123,7 @@ extension MainScreen: UICollectionViewDataSource, UICollectionViewDelegate {
 
         guard let cell = reusableCell else { return UICollectionViewCell() }
 
-        let mappedHourlyModel = Self.mapHourlyModel(presenter.getHourlyModel())
+        let mappedHourlyModel = Self.mapHourlyModel(output.getHourlyModel())
         cell.configure(with: mappedHourlyModel[indexPath.row])
 
         return cell
@@ -138,20 +137,19 @@ extension MainScreen: MainScreenInput {
 
     func configureMainScreen(with model: Weather) {
         // MARK: current view
-        let mappedCurrentModel = Self.mapCurrentModel(model)
+        guard let mappedCurrentModel = Self.mapCurrentModel(model) else { return }
+
         self.currentWeatherView.configure(with: mappedCurrentModel)
+
         // MARK: hourly view
-        self.hourlyView.configure(
-            with: HourlyView.Model(delegate: self, dataSource: self)
-        )
+        hourlyView.delegate = self
+        hourlyView.dataSource = self
+        hourlyView.reloadData()
 
         // MARK: daily view
-        self.dailyTableView.configure(
-            with: DailyTableView.Model(delegate: self, dataSource: self)
-        )
-
+        dailyTableView.delegate = self
+        dailyTableView.dataSource = self
         dailyTableView.reloadData()
-        hourlyView.reloadData()
     }
 
 }

@@ -9,7 +9,18 @@ final class MainScreenPresenter {
 
     // MARK: - Private Variables
 
-    private var state: State
+    private var state = State(
+        weather: Weather(
+            timezone: "",
+            current: Current(dt: 0,
+                             temp: 0,
+                             humidity: 0,
+                             clouds: 0,
+                             weather: []),
+            daily: [],
+            hourly: []
+        )
+    )
 
     // MARK: - External dependencies
 
@@ -22,7 +33,6 @@ final class MainScreenPresenter {
     init(view: MainScreenInput, interactor: MainModuleInteractor) {
         self.view = view
         self.interactor = interactor
-        state = State(weather: Weather())
     }
 
     // MARK: - Configure Main Screen
@@ -67,23 +77,22 @@ private extension MainScreenPresenter {
 extension MainScreenPresenter {
 
     // MARK: Get Daily Model
-    func getDailyModel() -> [ViewModel.DailyForecastModel] {
-        var viewModel = [ViewModel.DailyForecastModel]()
-        var dayViewModel: ViewModel.DailyForecastModel
+    func getDailyModel() -> [WeatherViewModel.DailyForecastModel] {
+        var viewModel = [WeatherViewModel.DailyForecastModel]()
 
-        for day in state.weather.daily ?? [] {
-            dayViewModel = ViewModel.DailyForecastModel(
-                dt: day.dt,
-                weather: ViewModel.WeatherElement(
-                    icon: day.weather?[0].main?.rawValue
+        _ = state.weather.daily.map {
+            let dayViewModel = WeatherViewModel.DailyForecastModel(
+                dt: $0.dt,
+                weather: WeatherViewModel.WeatherElement(
+                    icon: $0.weather[0].weatherConditions.rawValue
                 ),
-                temperature: ViewModel.Temperature(
-                    day: String(day.temp.day).components(separatedBy: ".")[0],
-                    min: String(day.temp.min).components(separatedBy: ".")[0],
-                    max: String(day.temp.max).components(separatedBy: ".")[0]
+                temperature: WeatherViewModel.Temperature(
+                    day: $0.temp.day.asRoundedString(),
+                    min: $0.temp.min.asRoundedString(),
+                    max: $0.temp.max.asRoundedString()
                 ),
-                humidity: String(day.humidity ?? 0),
-                clouds: day.clouds
+                humidity: String($0.humidity),
+                clouds: $0.clouds
             )
 
             viewModel.append(dayViewModel)
@@ -93,16 +102,15 @@ extension MainScreenPresenter {
     }
 
     // MARK: Get Hourly Model
-    func getHourlyModel() -> [ViewModel.CurrentForecastModel] {
-        var viewModel = [ViewModel.CurrentForecastModel]()
-        var hourViewModel: ViewModel.CurrentForecastModel
+    func getHourlyModel() -> [WeatherViewModel.CurrentForecastModel] {
+        var viewModel = [WeatherViewModel.CurrentForecastModel]()
 
-        for hour in state.weather.hourly ?? [] {
-            hourViewModel = ViewModel.CurrentForecastModel(
-                dt: getHour(from: hour.dt),
-                temp: String(hour.temp).components(separatedBy: ".")[0],
-                weather: ViewModel.WeatherElement(
-                    icon: hour.weather[0].main?.rawValue ?? ""
+        _ = state.weather.hourly.map {
+            let hourViewModel = WeatherViewModel.CurrentForecastModel(
+                dt: DateConverter.getHour(from: $0.dt),
+                temp: $0.temp.asRoundedString(),
+                weather: WeatherViewModel.WeatherElement(
+                    icon: $0.weather[0].weatherConditions.rawValue
                 )
             )
 

@@ -72,16 +72,16 @@ final class CurrentWeatherView: UIView {
 
 extension CurrentWeatherView: ViewConfiguration {
 
-    typealias Model = ViewModel
+    typealias Model = WeatherViewModel
 
     func configure(with model: Model) {
-        guard let currentDay = model.daily?.first else { return }
+        guard let currentDay = model.daily.first else { return }
 
         locationNameLabel.text = model.locationName
-        cloudsLabel.text = String(describing: currentDay.clouds ?? 0)
-        temperatureLabel.text = String(describing: currentDay.temperature?.day ?? "")
-        maxTemperatureLabel.text = String(describing: currentDay.temperature?.max ?? "")
-        minTemperatureLabel.text = String(describing: currentDay.temperature?.min ?? "")
+        cloudsLabel.text = String(describing: currentDay.clouds)
+        temperatureLabel.text = String(describing: currentDay.temperature.day)
+        maxTemperatureLabel.text = String(describing: currentDay.temperature.max)
+        minTemperatureLabel.text = String(describing: currentDay.temperature.min)
     }
 
 }

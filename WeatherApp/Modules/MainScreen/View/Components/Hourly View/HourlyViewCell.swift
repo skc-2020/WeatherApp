@@ -50,11 +50,11 @@ final class HourlyViewCell: ReusableCollection {
 
 extension HourlyViewCell {
 
-    typealias Model = ViewModel.CurrentForecastModel
+    typealias Model = WeatherViewModel.CurrentForecastModel
 
     func configure(with model: Model) {
         hourLabel.text = model.dt
-        cloudnessImage.image = UIImage(named: model.weather.icon ?? "")
+        cloudnessImage.image = UIImage(named: model.weather.icon ?? "no_Icon")
         temperatureLabel.text = model.temp
     }
 

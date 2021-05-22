@@ -7,22 +7,38 @@
 
 import Foundation
 
-// MARK: - Get Day From TimeInterval
+struct DateConverter {
 
-func getDayOfWeek(from timeInterval: Int) -> String {
+    // MARK: - Get Day From TimeInterval
 
-    let date = Date(timeIntervalSince1970: TimeInterval(timeInterval))
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "EEEE"
+     static func getDayOfWeek(from timeInterval: Int) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(timeInterval))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
 
-    return dateFormatter.string(from: date).capitalized
+        return dateFormatter.string(from: date).capitalized
+    }
+
+    // MARK: - Get Hour From TimeInterval
+
+    static func getHour(from timeInterval: Int) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(timeInterval))
+
+        return String(Calendar.current.component(.hour, from: date))
+    }
+
 }
 
-// MARK: - Get Hour From TimeInterval
+// MARK: - City Name Converter
 
-func getHour(from timeInterval: Int) -> String {
+struct CityNameConverter {
 
-    let date = Date(timeIntervalSince1970: TimeInterval(timeInterval))
+    static func getCityName(from model: String) -> String {
+        guard let cityName = model.components(separatedBy: "/")[safe: 1] else {
+            print("City name couldn't be get")
+            return ""
+        }
+        return cityName
+    }
 
-    return String(Calendar.current.component(.hour, from: date))
 }

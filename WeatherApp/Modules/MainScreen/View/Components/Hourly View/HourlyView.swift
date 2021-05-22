@@ -24,22 +24,6 @@ final class HourlyView: UICollectionView {
 
 }
 
-// MARK: - Configuration
-
-extension HourlyView: ViewConfiguration {
-
-    struct Model {
-        weak var delegate: UICollectionViewDelegate?
-        let dataSource: UICollectionViewDataSource
-    }
-
-    func configure(with model: Model) {
-        delegate = model.delegate
-        dataSource = model.dataSource
-    }
-
-}
-
 // MARK: - Setup View
 
 private extension HourlyView {

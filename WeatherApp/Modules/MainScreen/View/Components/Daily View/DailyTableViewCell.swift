@@ -61,14 +61,14 @@ final class DailyTableViewCell: ReusableTableView {
 
 extension DailyTableViewCell {
 
-    typealias Model = ViewModel.DailyForecastModel
+    typealias Model = WeatherViewModel.DailyForecastModel
 
     func configure(with model: Model) {
-        dayLabel.text = getDayOfWeek(from: model.dt ?? 0)
-        cloudnessImage.image = UIImage(named: model.weather?.icon ?? "")
+        dayLabel.text = DateConverter.getDayOfWeek(from: model.dt)
+        cloudnessImage.image = UIImage(named: model.weather.icon ?? "no_Icon")
         humidityLabel.text = model.humidity
-        maxTemperatureLabel.text = model.temperature?.max
-        minTemperatureLabel.text = model.temperature?.min
+        maxTemperatureLabel.text = model.temperature.max
+        minTemperatureLabel.text = model.temperature.min
     }
 
 }

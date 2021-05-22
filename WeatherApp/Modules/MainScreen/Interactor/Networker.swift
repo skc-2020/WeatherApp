@@ -11,6 +11,7 @@ final class Networker {
 
     func requestWeather(completion: @escaping (Weather) -> Void) {
         var urlComponents = URLComponents(string: "https://api.openweathermap.org/data/2.5/onecall")
+
         let queryItems: [URLQueryItem]? = [
             URLQueryItem(name: "exclude", value: "minutely"),
             URLQueryItem(name: "units", value: "metric"),
@@ -24,12 +25,8 @@ final class Networker {
         guard let url = urlComponents?.url else { return }
 
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
-
             do {
-
-                guard response != nil else { return }
-
-                guard let data = data else { return }
+                guard response != nil, let data = data else { return }
 
                 let weatherData = try JSONDecoder().decode(Weather.self, from: data)
                 DispatchQueue.main.async {

@@ -14,7 +14,7 @@ final class MainModuleAssembly {
 
         view.lifecycleListener = presenter
         view.output = presenter
-        view.presenter = presenter
+        view.output = presenter
 
         return view
     }

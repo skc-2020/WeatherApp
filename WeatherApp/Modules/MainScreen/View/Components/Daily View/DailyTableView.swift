@@ -24,22 +24,6 @@ final class DailyTableView: UITableView {
 
 }
 
-// MARK: - Configuration
-
-extension DailyTableView: ViewConfiguration {
-
-    struct Model {
-        weak var delegate: UITableViewDelegate?
-        let dataSource: UITableViewDataSource
-    }
-
-    func configure(with model: Model) {
-        delegate = model.delegate
-        dataSource = model.dataSource
-    }
-
-}
-
 // MARK: - Setup View
 
 private extension DailyTableView {

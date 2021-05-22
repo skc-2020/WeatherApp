@@ -13,20 +13,21 @@ extension MainScreen {
 
     // MARK: - Map Current Model
 
-    static func mapCurrentModel(_ model: Model) -> ViewModel {
-        guard let currentDay = model.daily?.first else { return ViewModel() }
+    static func mapCurrentModel(_ model: Model) -> WeatherViewModel? {
+        guard let currentDay = model.daily.first else { return nil }
 
-        return ViewModel(
-            locationName: model.timezone?.components(separatedBy: "/")[1] ?? "",
+        return WeatherViewModel(
+            locationName: CityNameConverter.getCityName(from: model.timezone),
             daily: [
-                ViewModel.DailyForecastModel(
-                    dt: currentDay.dt ?? 0,
-                    temperature: ViewModel.Temperature(
+                WeatherViewModel.DailyForecastModel(
+                    dt: currentDay.dt,
+                    weather: WeatherViewModel.WeatherElement(),
+                    temperature: WeatherViewModel.Temperature(
                         day: convertTemperature(currentDay.temp.day),
                         min: "L: " + convertTemperature(currentDay.temp.min),
                         max: "H: " + convertTemperature(currentDay.temp.max)
                     ),
-                    humidity: String(currentDay.humidity ?? 0),
+                    humidity: String(currentDay.humidity),
                     clouds: currentDay.clouds
                 )
             ]
@@ -35,15 +36,15 @@ extension MainScreen {
 
     // MARK: - Map Hourly Model
 
-    static func mapHourlyModel(_ model: [ViewModel.CurrentForecastModel]) -> [ViewModel.CurrentForecastModel] {
-        var mappedModel = [ViewModel.CurrentForecastModel]()
+    static func mapHourlyModel(_ model: [WeatherViewModel.CurrentForecastModel]) -> [WeatherViewModel.CurrentForecastModel] {
+        var mappedModel = [WeatherViewModel.CurrentForecastModel]()
 
-        for item in model {
+        _ = model.map {
             mappedModel.append(
-                ViewModel.CurrentForecastModel(
-                    dt: item.dt,
-                    temp: item.temp + Degree.sign.rawValue,
-                    weather: item.weather
+                WeatherViewModel.CurrentForecastModel(
+                    dt: $0.dt,
+                    temp: $0.temp + Degree.sign.rawValue,
+                    weather: $0.weather
                 )
             )
         }
@@ -57,8 +58,8 @@ extension MainScreen {
 
 private extension MainScreen {
 
-    static func convertTemperature(_ temp: Double) -> String {
-        String(temp).components(separatedBy: ".")[0] + Degree.sign.rawValue
+    static func convertTemperature(_ temperature: Double) -> String {
+        temperature.asRoundedString() + Degree.sign.rawValue
     }
 
 }
