@@ -8,6 +8,7 @@ target 'WeatherApp' do
   # Pods for WeatherApp
 
 pod 'SwiftLint'
+pod 'Moya', '~> 14.0'
 
 end
 

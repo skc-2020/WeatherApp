@@ -5,38 +5,45 @@
 //  Created by AndUser on 06.04.2021.
 //
 
-import Foundation
+import Moya
 
-final class Networker {
+enum Networker: TargetType {
 
-    func requestWeather(completion: @escaping (Weather) -> Void) {
-        var urlComponents = URLComponents(string: "https://api.openweathermap.org/data/2.5/onecall")
+    case requestWeather
 
-        let queryItems: [URLQueryItem]? = [
-            URLQueryItem(name: "exclude", value: "minutely"),
-            URLQueryItem(name: "units", value: "metric"),
-            URLQueryItem(name: "appid", value: "a64c3f8484fec35c8312f1bce96d8678"),
-            URLQueryItem(name: "lat", value: "50.45"),
-            URLQueryItem(name: "lon", value: "30.52")
-        ]
+    var baseURL: URL {
+        URL(string: "https://api.openweathermap.org/data/2.5/onecall")!
+    }
 
-        urlComponents?.queryItems = queryItems
+    var path: String {
+        ""
+    }
 
-        guard let url = urlComponents?.url else { return }
+    var method: Moya.Method {
+        .get
+    }
 
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            do {
-                guard response != nil, let data = data else { return }
+    var sampleData: Data {
+        Data()
+    }
 
-                let weatherData = try JSONDecoder().decode(Weather.self, from: data)
-                DispatchQueue.main.async {
-                    completion(weatherData)
-                }
-            } catch let error {
-                print("Error", error)
-            }
+    var task: Task {
+        switch self {
+        case .requestWeather:
+            return .requestParameters(
+                parameters: [
+                    "appid" : "a64c3f8484fec35c8312f1bce96d8678",
+                    "lat" : "50.45",
+                    "lon" : "30.52",
+                    "exclude" : "minutely",
+                    "units" : "metric"
+                ],
+                encoding: URLEncoding.queryString)
         }
-        task.resume()
+    }
+
+    var headers: [String : String]? {
+        nil
     }
 
 }
