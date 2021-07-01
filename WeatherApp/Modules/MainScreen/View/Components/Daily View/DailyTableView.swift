@@ -9,6 +9,10 @@ import UIKit
 
 final class DailyTableView: UITableView {
 
+    // MARK: - Variables
+
+    let cellId = DailyTableView.defaultReuseIdentifier + "Cell"
+
     // MARK: - Initializers
 
     override init(frame: CGRect, style: Style) {

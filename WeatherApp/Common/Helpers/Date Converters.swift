@@ -33,10 +33,10 @@ struct DateConverter {
 
 struct CityNameConverter {
 
-    static func getCityName(from model: String) -> String {
+    static func getCityName(from model: String) -> String? {
         guard let cityName = model.components(separatedBy: "/")[safe: 1] else {
             print("City name couldn't be get")
-            return ""
+            return nil
         }
         return cityName
     }

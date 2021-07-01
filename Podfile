@@ -8,6 +8,7 @@ target 'WeatherApp' do
   # Pods for WeatherApp
 
 pod 'SwiftLint'
+pod 'Alamofire', '~> 5.2'
 
 end
 

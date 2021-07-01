@@ -15,10 +15,6 @@ final class MainScreen: BaseViewController {
 
     // MARK: - Private Variables
 
-    private let cellId = DailyTableView.defaultReuseIdentifier + "Cell"
-
-    private let hourlyCellId = HourlyView.defaultReuseIdentifier + "Cell"
-
     private let currentWeatherView = CurrentWeatherView()
 
     private let hourlyView = HourlyView(
@@ -94,7 +90,7 @@ extension MainScreen: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let reusableCell = tableView.dequeueReusableCell(
-            withIdentifier: cellId, for: indexPath
+            withIdentifier: dailyTableView.cellId, for: indexPath
         ) as? DailyTableViewCell
 
         guard let cell = reusableCell else { return UITableViewCell() }
@@ -118,7 +114,7 @@ extension MainScreen: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let reusableCell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: hourlyCellId, for: indexPath
+            withReuseIdentifier: hourlyView.hourlyCellId, for: indexPath
         ) as? HourlyViewCell
 
         guard let cell = reusableCell else { return UICollectionViewCell() }
@@ -134,6 +130,7 @@ extension MainScreen: UICollectionViewDataSource, UICollectionViewDelegate {
 // MARK: - MainScreenInput
 
 extension MainScreen: MainScreenInput {
+    
 
     func configureMainScreen(with model: Weather) {
         // MARK: current view

@@ -54,7 +54,7 @@ extension HourlyViewCell {
 
     func configure(with model: Model) {
         hourLabel.text = model.dt
-        cloudnessImage.image = UIImage(named: model.weather.icon ?? "no_Icon")
+        cloudnessImage.image = UIImage(named: model.weather.icon ?? "") ?? DesignSystem.Images.noIcon
         temperatureLabel.text = model.temp
     }
 

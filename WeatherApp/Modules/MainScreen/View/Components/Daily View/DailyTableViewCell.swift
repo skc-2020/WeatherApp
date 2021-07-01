@@ -65,7 +65,7 @@ extension DailyTableViewCell {
 
     func configure(with model: Model) {
         dayLabel.text = DateConverter.getDayOfWeek(from: model.dt)
-        cloudnessImage.image = UIImage(named: model.weather.icon ?? "no_Icon")
+        cloudnessImage.image = UIImage(named: model.weather.icon ?? "") ?? DesignSystem.Images.noIcon
         humidityLabel.text = model.humidity
         maxTemperatureLabel.text = model.temperature.max
         minTemperatureLabel.text = model.temperature.min
