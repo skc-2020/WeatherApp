@@ -7,7 +7,9 @@
 
 import UIKit
 
-final class WeeklyTableViewCell: UITableViewCell, ReusableView {
+typealias ReusableTableView = UITableViewCell & ReusableView
+
+final class DailyTableViewCell: ReusableTableView {
 
     // MARK: - Private variables
 
@@ -57,23 +59,23 @@ final class WeeklyTableViewCell: UITableViewCell, ReusableView {
 
 // MARK: - Configuration
 
-extension WeeklyTableViewCell {
+extension DailyTableViewCell {
 
-    typealias Model = Weather.WeeklyModel
+    typealias Model = WeatherViewModel.DailyForecastModel
 
     func configure(with model: Model) {
-        dayLabel.text = model.dayOfWeek
-        cloudnessImage.image = UIImage(named: model.icon)
+        dayLabel.text = DateConverter.getDayOfWeek(from: model.dt)
+        cloudnessImage.image = UIImage(named: model.weather.icon ?? "") ?? DesignSystem.Images.noIcon
         humidityLabel.text = model.humidity
-        maxTemperatureLabel.text = model.maxTemperature
-        minTemperatureLabel.text = model.minTemperature
+        maxTemperatureLabel.text = model.temperature.max
+        minTemperatureLabel.text = model.temperature.min
     }
 
 }
 
 // MARK: - Setup View
 
-private extension WeeklyTableViewCell {
+private extension DailyTableViewCell {
 
     func setupView() {
         backgroundColor = UIColor(white: 0, alpha: 0)
@@ -83,8 +85,9 @@ private extension WeeklyTableViewCell {
 
 // MARK: - Setup Layout
 
-private extension WeeklyTableViewCell {
+private extension DailyTableViewCell {
 
+    // swiftlint:disable function_body_length
     func setupViewConstraints() {
         addSubviews(dayLabel,
                     cloudnessImage,
@@ -119,12 +122,13 @@ private extension WeeklyTableViewCell {
         minTemperatureLabel.pinLeadingEdge(to: .view(maxTemperatureLabel), attribute: .trailing, constant: 10)
         minTemperatureLabel.pinTrailingEdge(to: .view(self), attribute: .trailing, constant: -15)
     }
+    // swiftlint:enable function_body_length
 
 }
 
 // MARK: - Make functions
 
-extension WeeklyTableViewCell {
+private extension DailyTableViewCell {
 
     static func makeTemperatureLabel(with font: UIFont) -> CustomLabel {
         let label = CustomLabel()

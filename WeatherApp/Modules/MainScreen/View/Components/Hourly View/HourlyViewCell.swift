@@ -20,7 +20,7 @@ final class HourlyViewCell: ReusableCollection {
 
         return label
     }()
-    
+
     private let cloudnessImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -50,12 +50,12 @@ final class HourlyViewCell: ReusableCollection {
 
 extension HourlyViewCell {
 
-    typealias Model = Weather.HourlyModel
+    typealias Model = WeatherViewModel.CurrentForecastModel
 
     func configure(with model: Model) {
-        hourLabel.text = model.hour
-        cloudnessImage.image = UIImage(named: model.icon)
-        temperatureLabel.text = model.temperature
+        hourLabel.text = model.dt
+        cloudnessImage.image = UIImage(named: model.weather.icon ?? "") ?? DesignSystem.Images.noIcon
+        temperatureLabel.text = model.temp
     }
 
 }
@@ -92,7 +92,7 @@ private extension HourlyViewCell {
 
 // MARK: - Make functions
 
-extension HourlyViewCell {
+private extension HourlyViewCell {
 
     static func makeTemperatureLabel(with font: UIFont) -> CustomLabel {
         let label = CustomLabel()

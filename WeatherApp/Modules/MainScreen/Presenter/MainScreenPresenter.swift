@@ -5,7 +5,13 @@
 //  Created by AndUser on 14.03.2021.
 //
 
+import UIKit
+
 final class MainScreenPresenter {
+
+    // MARK: - Private Variables
+
+    private var state = State.initial
 
     // MARK: - External dependencies
 
@@ -22,8 +28,21 @@ final class MainScreenPresenter {
 
     // MARK: - Configure Main Screen
 
-    func showMainScreen() {
-        view.configureMainScreen(with: (interactor.getDailyWeather()))
+    func getCurrentWeather() {
+        interactor.getCurrentWeather { [weak self] data in
+            switch data {
+            case .failure(let error):
+                print(error.rawValue)
+                self?.view.showAlert(
+                    title: "There's a problem connecting to the server",
+                    message: "Please, try again in a while",
+                    actions: [.default]
+                )
+            case .success(let data):
+                self?.state.weather = data
+                self?.view.configureMainScreen(with: data)
+            }
+        }
     }
 
 }
@@ -33,11 +52,80 @@ final class MainScreenPresenter {
 extension MainScreenPresenter: LifecycleListener {
 
     func viewDidLoad() {
-        showMainScreen()
+        getCurrentWeather()
     }
 
 }
 
 // MARK: - MainScreenOutput
 
-extension MainScreenPresenter: MainScreenOutput {}
+extension MainScreenPresenter: MainScreenOutput {
+
+    // MARK: Get Daily Model
+    func getDailyModel() -> [WeatherViewModel.DailyForecastModel] {
+        state.weather.daily.map {
+            WeatherViewModel.DailyForecastModel(
+                dt: $0.dt,
+                weather: WeatherViewModel.WeatherElement(
+                    icon: $0.weather[safe: 0]?.weatherConditions.rawValue
+                ),
+                temperature: WeatherViewModel.Temperature(
+                    day: $0.temp.day.asRoundedString(),
+                    min: $0.temp.min.asRoundedString(),
+                    max: $0.temp.max.asRoundedString()
+                ),
+                humidity: String($0.humidity),
+                clouds: $0.clouds
+            )
+        }
+    }
+
+    // MARK: Get Hourly Model
+    func getHourlyModel() -> [WeatherViewModel.CurrentForecastModel] {
+        var viewModel = [WeatherViewModel.CurrentForecastModel]()
+
+        _ = state.weather.hourly.map {
+            let hourViewModel = WeatherViewModel.CurrentForecastModel(
+                dt: DateConverter.getHour(from: $0.dt),
+                temp: $0.temp.asRoundedString(),
+                weather: WeatherViewModel.WeatherElement(
+                    icon: $0.weather[safe: 0]?.weatherConditions.rawValue
+                )
+            )
+
+            viewModel.append(hourViewModel)
+        }
+
+        if viewModel[safe: 0] != nil {
+            viewModel[0].dt = "Now"
+        }
+
+        return viewModel
+    }
+
+}
+
+// MARK: - State
+
+private extension MainScreenPresenter {
+
+    struct State {
+        static let initial = Self(
+            weather: Weather(
+                timezone: "",
+                current: Current(
+                    dt: 0,
+                    temp: 0,
+                    humidity: 0,
+                    clouds: 0,
+                    weather: []
+                ),
+                daily: [],
+                hourly: []
+            )
+        )
+
+        var weather: Weather
+    }
+
+}

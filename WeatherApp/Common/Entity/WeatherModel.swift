@@ -2,103 +2,75 @@
 //  WeatherModel.swift
 //  WeatherApp
 //
-//  Created by AndUser on 13.03.2021.
+//  Created by AndUser on 07.04.2021.
 //
 
-struct Weather {
+// MARK: - Weather
 
-    struct DailyModel {
+struct Weather: Decodable {
 
-        let locationName: String
-        let cloudiness: String
-        let temperature: String
-        let maxTemperature: String
-        let minTemperature: String
-        let humidity: String?
-        let description: String?
+    let timezone: String
+    let current: Current
+    let daily: [Daily]
+    var hourly: [Current]
 
-        static let mock = Self(locationName: "Kyiv",
-                               cloudiness: "Mostly cloudy",
-                               temperature: "-4",
-                               maxTemperature: "3",
-                               minTemperature: "-9",
-                               humidity: "",
-                               description: "")
+}
 
+// MARK: - Current
+
+struct Current: Decodable {
+
+    var dt: Int
+    let temp: Double
+    let humidity: Int
+    let clouds: Int
+    let weather: [WeatherElement]
+
+}
+
+// MARK: - WeatherElement
+
+struct WeatherElement: Decodable {
+
+    let weatherConditions: WeatherConditions
+    let weatherDescription: String
+    let icon: String
+
+    enum CodingKeys: String, CodingKey {
+        case icon
+        case weatherConditions = "main"
+        case weatherDescription = "description"
     }
 
-    struct HourlyModel {
+}
 
-        let hour: String
-        let icon: String
-        let temperature: String
+enum WeatherConditions: String, Decodable {
+    case clear = "Clear"
+    case clouds = "Clouds"
+    case rain = "Rain"
+    case snow = "Snow"
+    case mist = "Mist"
+    case fog = "Fog"
+}
 
-        static let mock = [
-            Self(hour: "Now", icon: "sunny", temperature: "11"),
-            Self(hour: "16", icon: "sunny", temperature: "11"),
-            Self(hour: "17", icon: "cloudy", temperature: "12"),
-            Self(hour: "18", icon: "cloudy", temperature: "12"),
-            Self(hour: "19", icon: "cloudy", temperature: "13"),
-            Self(hour: "20", icon: "sunny", temperature: "13")
-        ]
-    }
+// MARK: - Daily
 
-    struct WeeklyModel {
+struct Daily: Decodable {
 
-        let dayOfWeek: String
-        let icon: String
-        let maxTemperature: String
-        let minTemperature: String
-        let humidity: String
+    let dt: Int
+    let temp: Temp
+    let humidity: Int
+    let weather: [WeatherElement]
+    let clouds: Int
 
-        static let mock = [
-            Self(dayOfWeek: "Monday",
-                 icon: "cloudy",
-                 maxTemperature: "5",
-                 minTemperature: "-9",
-                 humidity: "65%"),
-            Self(dayOfWeek: "Tuesday",
-                 icon: "sunny",
-                 maxTemperature: "7",
-                 minTemperature: "-8",
-                 humidity: "50%"),
-            Self(dayOfWeek: "Wednesday",
-                 icon: "rainy",
-                 maxTemperature: "5",
-                 minTemperature: "-9",
-                 humidity: "65%"),
-            Self(dayOfWeek: "Thursday",
-                 icon: "cloudy",
-                 maxTemperature: "5",
-                 minTemperature: "-9",
-                 humidity: "65%"),
-            Self(dayOfWeek: "Friday",
-                 icon: "sunny",
-                 maxTemperature: "7",
-                 minTemperature: "-8",
-                 humidity: "50%"),
-            Self(dayOfWeek: "Saturday",
-                 icon: "rainy",
-                 maxTemperature: "5",
-                 minTemperature: "-9",
-                 humidity: "65%"),
-            Self(dayOfWeek: "Sunday",
-                 icon: "sunny",
-                 maxTemperature: "5",
-                 minTemperature: "-9",
-                 humidity: "33%"),
-            Self(dayOfWeek: "Monday",
-                 icon: "cloudy",
-                 maxTemperature: "5",
-                 minTemperature: "-9",
-                 humidity: "65%"),
-            Self(dayOfWeek: "Tuesday",
-                 icon: "cloudy",
-                 maxTemperature: "7",
-                 minTemperature: "-8",
-                 humidity: "50%")
-        ]
+}
 
-    }
+// MARK: - Temp
+
+struct Temp: Decodable {
+
+    let day: Double
+    let min: Double
+    let max: Double
 
 }

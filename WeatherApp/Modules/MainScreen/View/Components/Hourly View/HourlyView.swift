@@ -9,7 +9,9 @@ import UIKit
 
 final class HourlyView: UICollectionView {
 
-    private let cellId = HourlyView.defaultReuseIdentifier + "Cell"
+    // MARK: - Variables
+
+    let hourlyCellId = HourlyView.defaultReuseIdentifier + "Cell"
 
     // MARK: - Initializers
 
@@ -33,30 +35,10 @@ private extension HourlyView {
     func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = UIColor(white: 1, alpha: 0)
-
-        delegate = self
-        dataSource = self
+        showsHorizontalScrollIndicator = false
+        layer.borderWidth = 0.3
+        layer.borderColor = UIColor.white.cgColor
         register(HourlyViewCell.self)
-    }
-
-}
-
-// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-
-extension HourlyView: UICollectionViewDelegate, UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        Weather.HourlyModel.mock.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let reusableCell = dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? HourlyViewCell
-
-        guard let cell = reusableCell else { return UICollectionViewCell() }
-
-        cell.configure(with: Weather.HourlyModel.mock[indexPath.row])
-
-        return cell
     }
 
 }
