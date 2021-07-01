@@ -8,17 +8,15 @@
 // MARK: - MainModuleInteractorProtocol
 
 protocol MainModuleInteractorProtocol {
-    func getCurrentWeather(completionHandler: @escaping (Weather) -> Void)
+    func getCurrentWeather(completionHandler: @escaping (Result<Weather, FetchWeatherError>) -> Void)
 }
 
 struct MainModuleInteractor: MainModuleInteractorProtocol {
 
     // MARK: - Get Current, Hourly, Daily Weather
 
-    func getCurrentWeather(completionHandler: @escaping (Weather) -> Void) {
-        Networker().requestWeather { data in
-            completionHandler(data)
-        }
+    func getCurrentWeather(completionHandler: @escaping (Result<Weather, FetchWeatherError>) -> Void) {
+        Networker().requestWeather(completion: completionHandler)
     }
 
 }

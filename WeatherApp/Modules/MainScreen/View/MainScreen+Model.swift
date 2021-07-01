@@ -17,7 +17,7 @@ extension MainScreen {
         guard let currentDay = model.daily.first else { return nil }
 
         return WeatherViewModel(
-            locationName: CityNameConverter.getCityName(from: model.timezone),
+            locationName: CityNameConverter.getCityName(from: model.timezone) ?? "",
             daily: [
                 WeatherViewModel.DailyForecastModel(
                     dt: currentDay.dt,
@@ -36,20 +36,15 @@ extension MainScreen {
 
     // MARK: - Map Hourly Model
 
-    static func mapHourlyModel(_ model: [WeatherViewModel.CurrentForecastModel]) -> [WeatherViewModel.CurrentForecastModel] {
-        var mappedModel = [WeatherViewModel.CurrentForecastModel]()
-
-        _ = model.map {
-            mappedModel.append(
-                WeatherViewModel.CurrentForecastModel(
-                    dt: $0.dt,
-                    temp: $0.temp + Degree.sign.rawValue,
-                    weather: $0.weather
-                )
+    static func mapHourlyModel(_ model: [WeatherViewModel.CurrentForecastModel])
+    -> [WeatherViewModel.CurrentForecastModel] {
+        model.map {
+            WeatherViewModel.CurrentForecastModel(
+                dt: $0.dt,
+                temp: $0.temp + Degree.sign.rawValue,
+                weather: $0.weather
             )
         }
-
-        return mappedModel
     }
 
 }

@@ -23,16 +23,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "258FFCD4-72CB-4E3B-909F-2AAF1540C0E7"
+            uuid = "652C9450-8EED-4AF8-8F34-2FF7C562C6EE"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WeatherApp/Modules/MainScreen/Presenter/MainScreenPresenter.swift"
+            filePath = "WeatherApp/Modules/MainScreen/View/Components/Hourly View/HourlyViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "getHourlyModel()"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "configure(with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -8,7 +8,7 @@
 extension Double {
 
     func asRoundedString() -> String {
-        String(self).components(separatedBy: ".")[0]
+        String(self).components(separatedBy: ".")[safe: 0] ?? ""
     }
 
 }

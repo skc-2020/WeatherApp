@@ -12,7 +12,7 @@ struct Weather: Decodable {
     let timezone: String
     let current: Current
     let daily: [Daily]
-    let hourly: [Current]
+    var hourly: [Current]
 
 }
 
@@ -20,7 +20,7 @@ struct Weather: Decodable {
 
 struct Current: Decodable {
 
-    let dt: Int
+    var dt: Int
     let temp: Double
     let humidity: Int
     let clouds: Int

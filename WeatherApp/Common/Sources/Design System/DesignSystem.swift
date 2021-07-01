@@ -15,6 +15,7 @@ extension DesignSystem {
 
     struct Images {
         static let sky = UIImage(named: "sky")
+        static let noIcon = UIImage(named: "no_Icon")
     }
 
 }

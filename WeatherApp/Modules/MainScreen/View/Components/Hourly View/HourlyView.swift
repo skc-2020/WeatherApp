@@ -9,6 +9,10 @@ import UIKit
 
 final class HourlyView: UICollectionView {
 
+    // MARK: - Variables
+
+    let hourlyCellId = HourlyView.defaultReuseIdentifier + "Cell"
+
     // MARK: - Initializers
 
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {

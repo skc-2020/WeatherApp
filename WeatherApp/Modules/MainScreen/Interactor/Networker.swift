@@ -7,9 +7,9 @@
 
 import Alamofire
 
-final class Networker {
+struct Networker {
 
-    func requestWeather(completion: @escaping (Weather) -> Void) {
+    func requestWeather(completion: @escaping (Result<Weather, FetchWeatherError>) -> Void) {
         let baseURL = "https://api.openweathermap.org/data/2.5/onecall"
         let parameters = [
             "appid" : "a64c3f8484fec35c8312f1bce96d8678",
@@ -29,10 +29,10 @@ final class Networker {
             do {
                 let weatherData = try JSONDecoder().decode(Weather.self, from: data)
                 DispatchQueue.main.async {
-                    completion(weatherData)
+                    completion(.success(weatherData))
                 }
-            } catch let error {
-                print("Error", error)
+            } catch {
+                completion(.failure(.connectionIssue))
             }
         }
     }
