@@ -12,6 +12,7 @@ final class MainScreenPresenter {
     // MARK: - Private Variables
 
     private var state = State.initial
+    private let location = Location()
 
     // MARK: - External dependencies
 
@@ -41,6 +42,7 @@ final class MainScreenPresenter {
             case .success(let data):
                 self?.state.weather = data
                 self?.view.configureMainScreen(with: data)
+                self?.location.getUserLocation()
             }
         }
     }

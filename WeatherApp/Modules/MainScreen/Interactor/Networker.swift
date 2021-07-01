@@ -6,6 +6,8 @@
 //
 
 import Alamofire
+import CoreLocation
+import UIKit
 
 struct Networker {
 
@@ -34,6 +36,44 @@ struct Networker {
             } catch {
                 completion(.failure(.connectionIssue))
             }
+        }
+    }
+
+}
+
+// MARK: - Location
+
+final class Location: NSObject, CLLocationManagerDelegate {
+
+    var manager = CLLocationManager()
+    var coordinates = CLLocationCoordinate2D()
+
+    func getUserLocation() {
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let first = locations.first else { return }
+
+        coordinates = first.coordinate
+    }
+
+    func getCoordinate(addressString : String,
+                       completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void ) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(addressString) { placemarks, error in
+            if error == nil {
+                if let placemark = placemarks?[0],
+                   let location = placemark.location {
+                    completionHandler(location.coordinate, nil)
+                    return
+                }
+            }
+
+            completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
         }
     }
 
