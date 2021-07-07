@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA028CC82694BF61008EF761 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA028CC72694BF61008EF761 /* Location.swift */; };
 		CA03BA0F268383CD00B2AA9B /* AlertDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA03BA0E268383CD00B2AA9B /* AlertDisplayable.swift */; };
 		CA14F75625FF5D5700637EA2 /* MainScreenInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA14F75525FF5D5700637EA2 /* MainScreenInput.swift */; };
 		CA22BD85260A332F00B0F6C6 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22BD84260A332F00B0F6C6 /* DesignSystem.swift */; };
@@ -48,6 +49,7 @@
 		2DCACFB9B29E941B2B4C3D47 /* Pods_WeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D7D1DBBB9C8B25A86ACDA26 /* Pods-WeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.release.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 		56A3FD5C648B4D231F268826 /* Pods-WeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.debug.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
+		CA028CC72694BF61008EF761 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		CA03BA0E268383CD00B2AA9B /* AlertDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDisplayable.swift; sourceTree = "<group>"; };
 		CA14F75525FF5D5700637EA2 /* MainScreenInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenInput.swift; sourceTree = "<group>"; };
 		CA22BD84260A332F00B0F6C6 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			children = (
 				CA3DFEE525FFB46C000CBF06 /* MainModuleInteractor.swift */,
 				CA266338261C7888005D5A9C /* Networker.swift */,
+				CA028CC72694BF61008EF761 /* Location.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA5D166025FCFDF900DA6E6F /* LifecycleListener.swift in Sources */,
+				CA028CC82694BF61008EF761 /* Location.swift in Sources */,
 				CAEF817F260A29EA000DF5B8 /* UIStackViewExtensions.swift in Sources */,
 				CA266340261DE500005D5A9C /* Date Converters.swift in Sources */,
 				CA5D165225FCFC9600DA6E6F /* BaseViewController.swift in Sources */,

@@ -11,7 +11,7 @@ import UIKit
 
 protocol AlertDisplayable: AnyObject {
 
-    func showAlert(title: String?, message: String?, actions: [UIAlertAction.Style])
+    func showAlert(title: String?, message: String?, actions: [UIAlertAction])
 
 }
 
@@ -21,7 +21,9 @@ protocol AlertViewTrait: AlertDisplayable {}
 
 extension AlertViewTrait where Self: UIViewController {
 
-    func showAlert(title: String?, message: String?, actions: [UIAlertAction.Style]) {
+    func showAlert(title: String?,
+                   message: String?,
+                   actions: [UIAlertAction]) {
         let alert = UIAlertController(
             title: title,
             message: message,
@@ -34,30 +36,9 @@ extension AlertViewTrait where Self: UIViewController {
     }
 
     private func configureActionsForAlert(_ alert: UIAlertController,
-                                          with actionViewModels: [UIAlertAction.Style]) {
-        actionViewModels.forEach { action in
-            var uiAlertAction: UIAlertAction?
-
-            switch action {
-            case .default:
-                uiAlertAction = UIAlertAction(title: "Ok", style: action) { _ in
-                    exit(0)
-                }
-            case .cancel:
-                uiAlertAction = UIAlertAction(title: "Cancel", style: action) { _ in
-                    // TODO: implement alert handler
-                }
-            case .destructive:
-                uiAlertAction = UIAlertAction(title: "Ahtung", style: action) { _ in
-                    // TODO: implement alert handler
-                }
-            @unknown default:
-                fatalError("There was an error. App is terminating")
-            }
-
-            uiAlertAction.map {
-                alert.addAction($0)
-            }
+                                          with actionViewModels: [UIAlertAction]) {
+        actionViewModels.forEach {
+            alert.addAction($0)
         }
     }
 

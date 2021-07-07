@@ -130,7 +130,6 @@ extension MainScreen: UICollectionViewDataSource, UICollectionViewDelegate {
 // MARK: - MainScreenInput
 
 extension MainScreen: MainScreenInput {
-    
 
     func configureMainScreen(with model: Weather) {
         // MARK: current view
