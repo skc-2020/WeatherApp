@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 final class MainScreenPresenter {
 
@@ -17,7 +18,9 @@ final class MainScreenPresenter {
 
     private unowned let view: MainScreenInput
 
-    private let interactor: MainModuleInteractorProtocol
+    private let interactor: MainModuleInteractorInput
+
+    var router: MainRouter?
 
     // MARK: - Initializers
 
@@ -47,7 +50,7 @@ final class MainScreenPresenter {
             case .success(let data):
                 self?.state.weather = data
                 self?.view.configureMainScreen(with: data)
-                self?.interactor.didSetupUserLocation()
+//                self?.interactor.didSetupUserLocation()
             }
         }
     }
@@ -110,6 +113,12 @@ extension MainScreenPresenter: MainScreenOutput {
         return viewModel
     }
 
+    // MARK: Get Current Location
+
+    func getCurrentLocation() {
+        interactor.obtainCurrentLocation()
+    }
+
 }
 
 // MARK: - State
@@ -129,10 +138,36 @@ private extension MainScreenPresenter {
                 ),
                 daily: [],
                 hourly: []
-            )
+            ),
+            coordinates: CLLocationCoordinate2D()
         )
 
         var weather: Weather
+        var coordinates: CLLocationCoordinate2D
+    }
+
+}
+
+// MARK: - didTapSearchButton
+
+extension MainScreenPresenter {
+
+    func didTapSearchButton() {
+        router?.displaySearchScreen()
+    }
+
+}
+
+// MARK: - SelectAddressMapInteractorOutput
+
+extension MainScreenPresenter: SelectAddressMapInteractorOutput {
+
+    func didObtainCoordinates(coordinates: CLLocationCoordinate2D) {
+        state.coordinates = coordinates
+    } // DELETE
+
+    func didObtainCurrentLocation(coordinates: CLLocationCoordinate2D) {
+        state.coordinates = coordinates
     }
 
 }

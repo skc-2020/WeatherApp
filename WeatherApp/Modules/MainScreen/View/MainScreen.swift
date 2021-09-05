@@ -29,6 +29,8 @@ final class MainScreen: BaseViewController {
 
     private let dailyTableView = DailyTableView()
 
+    private let footerView = FooterView()
+
     private let backgroundImage = UIImageView(image: DesignSystem.Images.sky)
 
     // MARK: - Override functions
@@ -36,8 +38,12 @@ final class MainScreen: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        openSearchScreen()
         setupView()
         setupViewConstraints()
+
+        // MARK: get initial current location
+        output.getCurrentLocation()
     }
 
 }
@@ -51,7 +57,8 @@ private extension MainScreen {
             backgroundImage,
             currentWeatherView,
             hourlyView,
-            dailyTableView
+            dailyTableView,
+            footerView
         )
     }
 
@@ -65,7 +72,7 @@ private extension MainScreen {
         currentWeatherView.pinLeadingEdge(to: .view(view), attribute: .leading)
         currentWeatherView.pinTrailingEdge(to: .view(view), attribute: .trailing)
         currentWeatherView.pinTopEdge(to: .view(view), attribute: .top)
-        currentWeatherView.height(equalTo: 410)
+        currentWeatherView.height(equalTo: 370)
 
         hourlyView.pinLeadingEdge(to: .view(view), attribute: .leading, constant: -1)
         hourlyView.pinTrailingEdge(to: .view(view), attribute: .trailing, constant: 1)
@@ -75,7 +82,12 @@ private extension MainScreen {
         dailyTableView.pinLeadingEdge(to: .view(view), attribute: .leading)
         dailyTableView.pinTrailingEdge(to: .view(view), attribute: .trailing)
         dailyTableView.pinTopEdge(to: .view(hourlyView), attribute: .bottom)
-        dailyTableView.height(equalTo: 600)
+        dailyTableView.height(equalTo: 280)
+
+        footerView.pinLeadingEdge(to: .view(view), attribute: .leading)
+        footerView.pinTrailingEdge(to: .view(view), attribute: .trailing)
+        footerView.pinTopEdge(to: .view(dailyTableView), attribute: .bottom)
+        footerView.height(equalTo: 80)
     }
 
 }
@@ -146,6 +158,18 @@ extension MainScreen: MainScreenInput {
         dailyTableView.delegate = self
         dailyTableView.dataSource = self
         dailyTableView.reloadData()
+    }
+
+}
+
+// MARK: - MainScreenInput
+
+extension MainScreen {
+
+    func openSearchScreen() {
+        footerView.closureHandler = {
+            self.output.didTapSearchButton()
+        }
     }
 
 }
