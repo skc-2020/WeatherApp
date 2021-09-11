@@ -17,7 +17,7 @@ final class MainScreenPresenter {
 
     private unowned let view: MainScreenInput
 
-    private let interactor: MainModuleInteractor
+    private let interactor: MainModuleInteractorProtocol
 
     // MARK: - Initializers
 
@@ -36,11 +36,18 @@ final class MainScreenPresenter {
                 self?.view.showAlert(
                     title: "There's a problem connecting to the server",
                     message: "Please, try again in a while",
-                    actions: [.default]
+                    actions: [
+                        UIAlertAction(
+                            title: "Ok",
+                            style: .default,
+                            handler: { _ in exit(0) }
+                        )
+                    ]
                 )
             case .success(let data):
                 self?.state.weather = data
                 self?.view.configureMainScreen(with: data)
+                self?.interactor.didSetupUserLocation()
             }
         }
     }
