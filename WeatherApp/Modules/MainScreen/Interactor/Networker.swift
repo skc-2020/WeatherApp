@@ -6,17 +6,23 @@
 //
 
 import Alamofire
+import CoreLocation
 
 struct Networker {
 
-    func requestWeather(completion: @escaping (Result<Weather, FetchWeatherError>) -> Void) {
+    func requestWeather( // TODO: remove default vals
+        for coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 50.45, longitude: 30.52),
+        completion: @escaping (Result<Weather, FetchWeatherError>) -> Void
+    ) {
+        let location = Location()
+
         let baseURL = "https://api.openweathermap.org/data/2.5/onecall"
         let parameters = [
             "appid" : "a64c3f8484fec35c8312f1bce96d8678",
             "exclude" : "minutely",
             "units" : "metric",
-            "lat" : "50.45",
-            "lon" : "30.52"
+            "lat" : "\(coordinate.latitude)",
+            "lon" : "\(coordinate.longitude)"
         ]
 
         AF.request(
@@ -26,6 +32,14 @@ struct Networker {
         .response { responceData in
             guard let data = responceData.data else { return }
 
+            location.getCoordinate { result in
+                switch result {
+                case .success(let data):
+                    print(data.latitude)
+                case .failure(let error):
+                    print(error)
+                }
+            }
             do {
                 let weatherData = try JSONDecoder().decode(Weather.self, from: data)
                 DispatchQueue.main.async {

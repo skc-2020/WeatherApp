@@ -16,6 +16,7 @@ extension DesignSystem {
     struct Images {
         static let sky = UIImage(named: "sky")
         static let noIcon = UIImage(named: "no_Icon")
+        static let list = UIImage(named: "list")
     }
 
 }
@@ -52,6 +53,7 @@ extension DesignSystem {
         static let medium3 = UIFont.systemFont(ofSize: Sizes.medium3)
         static let large = UIFont.systemFont(ofSize: Sizes.large)
         static let thinGiant = UIFont.systemFont(ofSize: Sizes.giant, weight: .thin)
+        static let boldLarge = UIFont.systemFont(ofSize: Sizes.large, weight: .bold)
 
     }
 

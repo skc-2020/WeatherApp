@@ -120,7 +120,7 @@ private extension DailyTableViewCell {
         minTemperatureLabel.pinTopEdge(to: .layout(layoutMarginsGuide), attribute: .top)
         minTemperatureLabel.pinBottomEdge(to: .layout(layoutMarginsGuide), attribute: .bottom)
         minTemperatureLabel.pinLeadingEdge(to: .view(maxTemperatureLabel), attribute: .trailing, constant: 10)
-        minTemperatureLabel.pinTrailingEdge(to: .view(self), attribute: .trailing, constant: -15)
+        minTemperatureLabel.pinTrailingEdge(to: .view(self), attribute: .trailing, constant: -10)
     }
     // swiftlint:enable function_body_length
 
