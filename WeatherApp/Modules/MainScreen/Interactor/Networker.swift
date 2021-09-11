@@ -29,8 +29,8 @@ struct Networker {
             baseURL,
             parameters: parameters
         )
-        .response { responceData in
-            guard let data = responceData.data else { return }
+        .response { responseData in
+            guard let data = responseData.data else { return }
 
             location.getCoordinate { result in
                 switch result {

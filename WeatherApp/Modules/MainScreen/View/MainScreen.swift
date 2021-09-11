@@ -60,6 +60,7 @@ private extension MainScreen {
             dailyTableView,
             footerView
         )
+        view.accessibilityIdentifier = "MainView"
     }
 
 }
