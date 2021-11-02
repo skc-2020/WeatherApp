@@ -64,6 +64,7 @@ private extension SearchScreen {
 
     func setupView() {
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = "SearchView"
 
         view.addSubviews(
             weatherTitle,
