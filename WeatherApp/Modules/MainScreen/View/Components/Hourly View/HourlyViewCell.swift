@@ -76,8 +76,7 @@ private extension HourlyViewCell {
         hourLabel.pinTopEdge(to: .view(self), attribute: .top, constant: 4)
         hourLabel.height(equalTo: 34)
 
-        cloudnessImage.pinLeadingEdge(to: .layout(layoutMarginsGuide), attribute: .leading)
-        cloudnessImage.pinTrailingEdge(to: .layout(layoutMarginsGuide), attribute: .trailing)
+        cloudnessImage.centerX(equalsToCenterIn: self)
         cloudnessImage.pinTopEdge(to: .view(hourLabel), attribute: .bottom, constant: 4)
         cloudnessImage.height(equalTo: 37)
         cloudnessImage.width(equalTo: 37)

@@ -43,7 +43,7 @@ final class MainScreen: BaseViewController {
         setupViewConstraints()
 
         // MARK: get initial current location
-        output.getCurrentLocation()
+//        output.getCurrentLocation()
     }
 
 }

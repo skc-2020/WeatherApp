@@ -10,6 +10,6 @@ protocol MainScreenOutput {
     func getDailyModel() -> [WeatherViewModel.DailyForecastModel]
     func getHourlyModel() -> [WeatherViewModel.CurrentForecastModel]
     func didTapSearchButton()
-    func getCurrentLocation()
+//    func getCurrentLocation()
 
 }

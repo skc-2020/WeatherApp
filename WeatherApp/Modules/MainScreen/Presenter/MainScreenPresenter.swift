@@ -14,11 +14,11 @@ final class MainScreenPresenter {
 
     private var state = State.initial
 
-    // MARK: - External dependencies
-
     private unowned let view: MainScreenInput
 
     private let interactor: MainModuleInteractorInput
+
+    // MARK: - External dependencies
 
     var router: MainRouter?
 
@@ -29,10 +29,14 @@ final class MainScreenPresenter {
         self.interactor = interactor
     }
 
-    // MARK: - Configure Main Screen
+}
+
+// MARK: - Configure Main Screen
+
+extension MainScreenPresenter {
 
     func getCurrentWeather() {
-        interactor.getCurrentWeather { [weak self] data in
+        interactor.getInitialCurrentWeather { [weak self] data in
             switch data {
             case .failure(let error):
                 print(error.rawValue)
@@ -50,7 +54,6 @@ final class MainScreenPresenter {
             case .success(let data):
                 self?.state.weather = data
                 self?.view.configureMainScreen(with: data)
-//                self?.interactor.didSetupUserLocation()
             }
         }
     }
@@ -62,6 +65,8 @@ final class MainScreenPresenter {
 extension MainScreenPresenter: LifecycleListener {
 
     func viewDidLoad() {
+
+        // MARK: Get Current Location
         getCurrentWeather()
     }
 
@@ -113,12 +118,6 @@ extension MainScreenPresenter: MainScreenOutput {
         return viewModel
     }
 
-    // MARK: Get Current Location
-
-    func getCurrentLocation() {
-        interactor.obtainCurrentLocation()
-    }
-
 }
 
 // MARK: - State
@@ -154,20 +153,6 @@ extension MainScreenPresenter {
 
     func didTapSearchButton() {
         router?.displaySearchScreen()
-    }
-
-}
-
-// MARK: - SelectAddressMapInteractorOutput
-
-extension MainScreenPresenter: SelectAddressMapInteractorOutput {
-
-    func didObtainCoordinates(coordinates: CLLocationCoordinate2D) {
-        state.coordinates = coordinates
-    } // DELETE
-
-    func didObtainCurrentLocation(coordinates: CLLocationCoordinate2D) {
-        state.coordinates = coordinates
     }
 
 }

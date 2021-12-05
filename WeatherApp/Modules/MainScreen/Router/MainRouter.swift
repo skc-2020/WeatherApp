@@ -21,7 +21,6 @@ final class MainRouter {
 
     func displaySearchScreen() {
         let searchScreen = SearchModuleAssembly.buildModule()
-//        searchScreen.modalPresentationStyle = .fullScreen
         view?.present(searchScreen, animated: true, completion: nil)
     }
 

@@ -7,8 +7,7 @@
 
 protocol MainModuleInteractorInput {
 
-    func getCurrentWeather(completionHandler: @escaping (Result<Weather, FetchWeatherError>) -> Void)
-    func obtainCoordinates(address: String)
-    func obtainCurrentLocation()
+    func getCurrentWeather(for city: String, completionHandler: @escaping (Result<Weather, FetchWeatherError>) -> Void)
+    func getInitialCurrentWeather(completionHandler: @escaping (Result<Weather, FetchWeatherError>) -> Void)
 
 }

@@ -11,25 +11,25 @@ final class Location: NSObject, CLLocationManagerDelegate {
 
     typealias CurrentLocationRequestResult = Result<CLLocationCoordinate2D, NSError>
 
-    private let manager = CLLocationManager()
-    private var coordinates = CLLocationCoordinate2D()
+    private var manager: CLLocationManager!
+    var coordsHandler: ((CLLocationCoordinate2D) -> Void)?
 
-    func setupUserLocation(completion: @escaping (CurrentLocationRequestResult) -> Void) {
+    func setupUserLocation() {
+        manager = CLLocationManager()
         manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
     }
 
-    private func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) -> CLLocationCoordinate2D {
-        guard let first = locations.first else { return CLLocationCoordinate2D() }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let first = locations.first else { return }
 
-        coordinates = first.coordinate
-        return coordinates
+        coordsHandler?(first.coordinate)
     }
 
-    func getCoordinate(addressString : String = "Kyiv",
-                       completionHandler: @escaping(Result<CLLocationCoordinate2D, NSError>) -> Void ) {
+    func getCoordinate(of addressString: String,
+                       completionHandler: @escaping(CurrentLocationRequestResult) -> Void ) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(addressString) { placemarks, error in
             guard error == nil else {
