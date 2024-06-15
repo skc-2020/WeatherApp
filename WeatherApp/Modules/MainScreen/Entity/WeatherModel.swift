@@ -2,25 +2,31 @@
 //  WeatherModel.swift
 //  WeatherApp
 //
-//  Created by AndUser on 07.04.2021.
+//  Created by SKC on 07.04.2021.
 //
 
 // MARK: - Weather
 
-struct Weather: Decodable {
+struct Weather: Codable {
 
-    let timezone: String
+    var timezone: String
+    let timezoneOffset: Int
     let current: Current
     let daily: [Daily]
     var hourly: [Current]
+
+    enum CodingKeys: String, CodingKey {
+        case timezone, current, daily, hourly
+        case timezoneOffset = "timezone_offset"
+    }
 
 }
 
 // MARK: - Current
 
-struct Current: Decodable {
+struct Current: Codable {
 
-    var dt: Int
+    let dt: Int
     let temp: Double
     let humidity: Int
     let clouds: Int
@@ -30,7 +36,7 @@ struct Current: Decodable {
 
 // MARK: - WeatherElement
 
-struct WeatherElement: Decodable {
+struct WeatherElement: Codable {
 
     let weatherConditions: WeatherConditions
     let weatherDescription: String
@@ -44,18 +50,20 @@ struct WeatherElement: Decodable {
 
 }
 
-enum WeatherConditions: String, Decodable {
+enum WeatherConditions: String, Codable {
     case clear = "Clear"
     case clouds = "Clouds"
     case rain = "Rain"
     case snow = "Snow"
     case mist = "Mist"
     case fog = "Fog"
+    case sand = "Sand"
+    case smoke = "Smoke"
 }
 
 // MARK: - Daily
 
-struct Daily: Decodable {
+struct Daily: Codable {
 
     let dt: Int
     let temp: Temp
@@ -67,7 +75,7 @@ struct Daily: Decodable {
 
 // MARK: - Temp
 
-struct Temp: Decodable {
+struct Temp: Codable {
 
     let day: Double
     let min: Double

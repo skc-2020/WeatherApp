@@ -2,17 +2,25 @@
 //  MainScreenTests.swift
 //  WeatherAppUITests
 //
-//  Created by AndUser on 05.09.2021.
+//  Created by SKC on 05.09.2021.
 //
 
 import XCTest
 
 class MainScreenTests: CommonTestCase {
 
-    func testSearchPageAppeared() {
+    func testMainScreenisFullyLoaded() {
         application.launch()
 
-        MainPage(app: application)
+        MainScreen(app: application)
+            .checkActivityIndicatorDissapeared()
+        sleep(4)
+    }
+
+    func testSearchScreenAppeared() {
+        application.launch()
+
+        MainScreen(app: application)
             .tapSearchButton()
         SearchPage(app: application)
             .verifySearchPageIsDisplayed()

@@ -2,7 +2,7 @@
 //  AlertDisplayable.swift
 //  WeatherApp
 //
-//  Created by AndUser on 23.06.2021.
+//  Created by SKC on 23.06.2021.
 //
 
 import UIKit

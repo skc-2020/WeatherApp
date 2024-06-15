@@ -2,7 +2,7 @@
 //  UIStackViewExtension.swift
 //  WeatherApp
 //
-//  Created by AndUser on 23.03.2021.
+//  Created by SKC on 23.03.2021.
 //
 
 import UIKit

@@ -2,12 +2,12 @@
 //  MainPage.swift
 //  WeatherAppUITests
 //
-//  Created by AndUser on 05.09.2021.
+//  Created by SKC on 05.09.2021.
 //
 
 import XCTest
 
-class MainPage: CommonPage {
+class MainScreen: CommonScreen {
 
     // MARK: - Initializers
 
@@ -24,6 +24,10 @@ class MainPage: CommonPage {
         view.buttons.firstMatch
     }()
 
+    private lazy var activityIndicator: XCUIElement = {
+        view.images.element(boundBy: 0)
+    }()
+
     // MARK: - Actions
 
     @discardableResult
@@ -32,4 +36,9 @@ class MainPage: CommonPage {
         return self
     }
 
+    // MARK: - Checks
+
+    func checkActivityIndicatorDissapeared() {
+        activityIndicator.waitForNotExistence()
+    }
 }

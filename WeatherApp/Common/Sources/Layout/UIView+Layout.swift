@@ -2,7 +2,7 @@
 //  UIView+Layout.swift
 //  WeatherApp
 //
-//  Created by AndUser on 31.03.2021.
+//  Created by SKC on 31.03.2021.
 //
 
 import UIKit

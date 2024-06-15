@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  WeatherApp
 //
-//  Created by AndUser on 11.03.2021.
+//  Created by SKC on 11.03.2021.
 //
 
 import UIKit
@@ -14,6 +14,14 @@ final class MainScreen: BaseViewController {
     var output: MainScreenOutput!
 
     // MARK: - Private Variables
+    private var activityIndicator: UIActivityIndicatorView = {
+        var activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.style = .large
+        activityIndicator.color = DesignSystem.Colors.white
+
+        return activityIndicator
+    }()
 
     private let currentWeatherView = CurrentWeatherView()
 
@@ -35,15 +43,11 @@ final class MainScreen: BaseViewController {
 
     // MARK: - Override functions
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
         openSearchScreen()
         setupView()
-        setupViewConstraints()
-
-        // MARK: get initial current location
-//        output.getCurrentLocation()
     }
 
 }
@@ -58,8 +62,13 @@ private extension MainScreen {
             currentWeatherView,
             hourlyView,
             dailyTableView,
-            footerView
+            footerView,
+            activityIndicator
         )
+
+        setupViewConstraints()
+        activityIndicator.startAnimating()
+
         view.accessibilityIdentifier = "MainView"
     }
 
@@ -70,6 +79,11 @@ private extension MainScreen {
 private extension MainScreen {
 
     func setupViewConstraints() {
+        activityIndicator.pinTopEdge(to: .view(view), attribute: .top)
+        activityIndicator.pinBottomEdge(to: .view(view), attribute: .bottom)
+        activityIndicator.pinLeadingEdge(to: .view(view), attribute: .leading)
+        activityIndicator.pinTrailingEdge(to: .view(view), attribute: .trailing)
+
         currentWeatherView.pinLeadingEdge(to: .view(view), attribute: .leading)
         currentWeatherView.pinTrailingEdge(to: .view(view), attribute: .trailing)
         currentWeatherView.pinTopEdge(to: .view(view), attribute: .top)
@@ -159,17 +173,18 @@ extension MainScreen: MainScreenInput {
         dailyTableView.delegate = self
         dailyTableView.dataSource = self
         dailyTableView.reloadData()
+        self.activityIndicator.stopAnimating()
     }
 
 }
 
-// MARK: - MainScreenInput
+// MARK: - Open Search Screen
 
-extension MainScreen {
+private extension MainScreen {
 
     func openSearchScreen() {
-        footerView.closureHandler = {
-            self.output.didTapSearchButton()
+        footerView.searchButtonHandler = { [weak self] in
+            self?.output.didTapSearchButton()
         }
     }
 

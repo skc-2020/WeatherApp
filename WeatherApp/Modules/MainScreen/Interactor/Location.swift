@@ -2,7 +2,7 @@
 //  Location.swift
 //  WeatherApp
 //
-//  Created by AndUser on 06.07.2021.
+//  Created by SKC on 06.07.2021.
 //
 
 import CoreLocation
@@ -13,6 +13,14 @@ final class Location: NSObject, CLLocationManagerDelegate {
 
     private var manager: CLLocationManager!
     var coordsHandler: ((CLLocationCoordinate2D) -> Void)?
+
+    override init() {
+        print("Location Inited")
+    }
+
+    deinit {
+        print("Location De-Inited")
+    }
 
     func setupUserLocation() {
         manager = CLLocationManager()

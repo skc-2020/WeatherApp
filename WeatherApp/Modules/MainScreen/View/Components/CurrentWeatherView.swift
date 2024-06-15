@@ -2,7 +2,7 @@
 //  Component.swift
 //  WeatherApp
 //
-//  Created by AndUser on 13.03.2021.
+//  Created by SKC on 13.03.2021.
 //
 
 import UIKit
@@ -35,7 +35,7 @@ final class CurrentWeatherView: UIView {
         return label
     }()
 
-    private let temperatureLabel = makeTemperatureLabel(with: DesignSystem.Fonts.thinGiant)
+    private let temperatureLabel = makeTemperatureLabel(with: DesignSystem.Fonts.giantThin)
 
     // MARK: Temperature Range StackView
 
@@ -117,20 +117,6 @@ private extension CurrentWeatherView {
 
         stackView.pinTopEdge(to: .view(self), attribute: .top, constant: 120)
         stackView.centerX(equalsToCenterIn: self)
-    }
-
-}
-
-// MARK: - Make functions
-
-private extension CurrentWeatherView {
-
-    static func makeTemperatureLabel(with font: UIFont) -> CustomLabel {
-        let label = CustomLabel()
-        label.font = font
-        label.textAlignment = .center
-
-        return label
     }
 
 }

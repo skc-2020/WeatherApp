@@ -2,7 +2,7 @@
 //  HourlyViewCell.swift
 //  WeatherApp
 //
-//  Created by AndUser on 25.03.2021.
+//  Created by SKC on 25.03.2021.
 //
 
 import UIKit
@@ -85,20 +85,6 @@ private extension HourlyViewCell {
         temperatureLabel.pinTrailingEdge(to: .layout(layoutMarginsGuide), attribute: .trailing)
         temperatureLabel.pinTopEdge(to: .view(cloudnessImage), attribute: .bottom, constant: 4)
         temperatureLabel.pinBottomEdge(to: .view(self), attribute: .bottom)
-    }
-
-}
-
-// MARK: - Make functions
-
-private extension HourlyViewCell {
-
-    static func makeTemperatureLabel(with font: UIFont) -> CustomLabel {
-        let label = CustomLabel()
-        label.font = font
-        label.textAlignment = .center
-
-        return label
     }
 
 }

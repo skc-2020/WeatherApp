@@ -2,20 +2,19 @@
 //  MainModuleAssembly.swift
 //  WeatherApp
 //
-//  Created by AndUser on 13.03.2021.
+//  Created by SKC on 13.03.2021.
 //
 
 import CoreLocation
 
 final class MainModuleAssembly {
 
-    static func buildModule() -> BaseViewController {
+    static func buildModule(with city: String? = nil) -> BaseViewController {
+        let weatherService = WeatherService(location: Location())
         let view = MainScreen()
-        let interactor = MainModuleInteractor(
-            networker: Networker(location: Location())
-        )
-        let router = MainRouter(view: view)
-        let presenter = MainScreenPresenter(view: view, interactor: interactor)
+        let interactor = MainScreenInteractor(weatherService: weatherService)
+        let presenter = MainScreenPresenter(view: view, interactor: interactor, city: city)
+        let router: MainRouterInput = MainRouter(view: view, weatherService: weatherService)
 
         view.lifecycleListener = presenter
         view.output = presenter

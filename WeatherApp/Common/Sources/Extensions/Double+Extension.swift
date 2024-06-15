@@ -2,7 +2,7 @@
 //  Double+Extension.swift
 //  WeatherApp
 //
-//  Created by AndUser on 20.05.2021.
+//  Created by SKC on 20.05.2021.
 //
 
 extension Double {

@@ -2,7 +2,7 @@
 //  MainScreenInput.swift
 //  WeatherApp
 //
-//  Created by AndUser on 15.03.2021.
+//  Created by SKC on 15.03.2021.
 //
 
 import UIKit
