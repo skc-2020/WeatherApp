@@ -2,7 +2,7 @@
 //  ReusableView.swift
 //  WeatherApp
 //
-//  Created by AndUser on 04.04.2021.
+//  Created by SKC on 04.04.2021.
 //
 
 import UIKit

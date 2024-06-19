@@ -1,25 +1,25 @@
 //
-//  Networker.swift
+//  WeatherService.swift
 //  WeatherApp
 //
-//  Created by AndUser on 06.04.2021.
+//  Created by SKC on 06.04.2021.
 //
 
 import Alamofire
 import CoreLocation
 
-typealias NetworkRequestResult = Result<Weather, FetchWeatherError>
+typealias WeatherRequestResult = Result<Weather, FetchWeatherError>
 
-// MARK: - Networker Protocol
+// MARK: - WeatherService Protocol
 
-protocol NetworkerProtocol {
-    func fetchWeather(for city: String, completionHandler: @escaping (NetworkRequestResult) -> Void)
-    func fetchWeather(completionHandler: @escaping (NetworkRequestResult) -> Void)
+protocol WeatherServiceProtocol {
+    func requestWeather(for city: String, completionHandler: @escaping (WeatherRequestResult) -> Void)
+    func requestWeather(completionHandler: @escaping (WeatherRequestResult) -> Void)
 }
 
-// MARK: - Network Service
+// MARK: - Weather Service
 
-struct Networker {
+struct WeatherService {
 
     let location: Location
 
@@ -28,8 +28,8 @@ struct Networker {
     }
 
     func requestWeather(
-        for coordinates: (latitude: Double, longitude: Double),
-        completion: @escaping (NetworkRequestResult) -> Void
+        by coordinates: (latitude: Double, longitude: Double),
+        completion: @escaping (WeatherRequestResult) -> Void
     ) {
         let baseURL = "https://api.openweathermap.org/data/2.5/onecall"
         let parameters = [
@@ -60,18 +60,21 @@ struct Networker {
 
 }
 
-// MARK: - NetworkerProtocol
+// MARK: - WeatherServiceProtocol
 
-extension Networker: NetworkerProtocol {
+extension WeatherService: WeatherServiceProtocol {
 
-    // MARK: - Fetch Weather using city string
+    // MARK: Fetch Weather using city string
 
-    func fetchWeather(for city: String = "Kyiv", completionHandler: @escaping (NetworkRequestResult) -> Void) {
+    func requestWeather(
+        for city: String = "Kyiv",
+        completionHandler: @escaping (WeatherRequestResult) -> Void
+    ) {
         location.getCoordinate(of: city) { result in
             switch result {
             case .success(let data):
                 requestWeather(
-                    for: (latitude: data.latitude, longitude: data.longitude),
+                    by: (latitude: data.latitude, longitude: data.longitude),
                     completion: completionHandler
                 )
             case .failure(let error):
@@ -81,14 +84,14 @@ extension Networker: NetworkerProtocol {
 
     }
 
-    // MARK: - Fetch Weather using coordinates
+    // MARK: Fetch Weather using coordinates
 
-    func fetchWeather(completionHandler: @escaping (NetworkRequestResult) -> Void) {
+    func requestWeather(completionHandler: @escaping (WeatherRequestResult) -> Void) {
         location.setupUserLocation()
 
         location.coordsHandler = { coords in
             requestWeather(
-                for: (latitude: coords.latitude, longitude: coords.longitude),
+                by: (latitude: coords.latitude, longitude: coords.longitude),
                 completion: completionHandler
             )
         }

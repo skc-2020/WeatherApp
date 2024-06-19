@@ -2,7 +2,7 @@
 //  XCUIElementExtension.swift
 //  WeatherAppUITests
 //
-//  Created by AndUser on 07.09.2021.
+//  Created by SKC on 07.09.2021.
 //
 
 import XCTest
@@ -58,6 +58,15 @@ extension XCUIElement {
             )
     }
 
+    @discardableResult
+    func waitForNotExistence(timeout: TimeInterval = 6) -> Bool {
+        let predicate = NSPredicate(format: "exists == false")
+        let expectation = XCTNSPredicateExpectation(predicate: predicate, object: self)
+        _ = XCTWaiter.wait(for: [expectation], timeout: timeout)
+
+        return !exists
+    }
+    
     @discardableResult
     func waitForHittable(
         timeout: TimeInterval = 10,

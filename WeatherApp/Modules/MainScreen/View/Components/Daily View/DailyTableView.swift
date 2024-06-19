@@ -2,7 +2,7 @@
 //  WeeklyTableView.swift
 //  WeatherApp
 //
-//  Created by AndUser on 25.03.2021.
+//  Created by SKC on 25.03.2021.
 //
 
 import UIKit

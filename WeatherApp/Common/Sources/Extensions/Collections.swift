@@ -2,7 +2,7 @@
 //  Collections.swift
 //  WeatherApp
 //
-//  Created by AndUser on 22.05.2021.
+//  Created by SKC on 22.05.2021.
 //
 
 // MARK: - Collection extension

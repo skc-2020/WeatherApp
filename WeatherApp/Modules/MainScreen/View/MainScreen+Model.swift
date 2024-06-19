@@ -2,7 +2,7 @@
 //  MainScreen+Model.swift
 //  WeatherApp
 //
-//  Created by AndUser on 24.03.2021.
+//  Created by SKC on 24.03.2021.
 //
 
 // MARK: - Mapper

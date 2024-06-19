@@ -2,7 +2,7 @@
 //  CustomLabel.swift
 //  WeatherApp
 //
-//  Created by AndUser on 14.03.2021.
+//  Created by SKC on 14.03.2021.
 //
 
 import UIKit

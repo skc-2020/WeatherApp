@@ -6,6 +6,9 @@
 # CMake
 cmake-build-*/
 
+# text files
+*.rtf
+
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
 

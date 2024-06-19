@@ -2,7 +2,7 @@
 //  FooterView.swift
 //  WeatherApp
 //
-//  Created by AndUser on 08.07.2021.
+//  Created by SKC on 08.07.2021.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ final class FooterView: UIView {
 
     // MARK: - Private variables
 
-    var closureHandler: ButtonHandler?
+    var searchButtonHandler: ButtonHandler?
 
     private let optionsButton: UIButton = {
         let button = UIButton()
@@ -77,7 +77,7 @@ private extension FooterView {
 
     @objc
     func tapAddContact() {
-        closureHandler?()
+        searchButtonHandler?()
     }
 
 }

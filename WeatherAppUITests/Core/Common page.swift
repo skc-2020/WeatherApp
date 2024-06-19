@@ -2,12 +2,12 @@
 //  Common page.swift
 //  WeatherAppUITests
 //
-//  Created by AndUser on 05.09.2021.
+//  Created by SKC on 05.09.2021.
 //
 
 import XCTest
 
-class CommonPage {
+class CommonScreen {
 
     let view: XCUIElement
     let app: XCUIApplication

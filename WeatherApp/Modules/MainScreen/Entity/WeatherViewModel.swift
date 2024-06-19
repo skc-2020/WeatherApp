@@ -2,7 +2,7 @@
 //  ViewModel.swift
 //  WeatherApp
 //
-//  Created by AndUser on 09.04.2021.
+//  Created by SKC on 09.04.2021.
 //
 
 // MARK: - View Model
@@ -10,6 +10,7 @@
 struct WeatherViewModel {
 
     let locationName: String
+    var current: Current?
     let daily: [DailyForecastModel]
     var hourly: [CurrentForecastModel]?
 

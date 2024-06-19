@@ -2,7 +2,7 @@
 //  MainScreenPresenter.swift
 //  WeatherApp
 //
-//  Created by AndUser on 14.03.2021.
+//  Created by SKC on 14.03.2021.
 //
 
 import UIKit
@@ -12,31 +12,30 @@ final class MainScreenPresenter {
 
     // MARK: - Private Variables
 
-    private var state = State.initial
-
+    private let city: String?
     private unowned let view: MainScreenInput
-
-    private let interactor: MainModuleInteractorInput
+    private let interactor: MainScreenInteractorInput
 
     // MARK: - External dependencies
 
-    var router: MainRouter?
+    var router: MainRouterInput?
 
     // MARK: - Initializers
 
-    init(view: MainScreenInput, interactor: MainModuleInteractor) {
+    init(view: MainScreenInput, interactor: MainScreenInteractor, city: String? = nil) {
         self.view = view
         self.interactor = interactor
+        self.city = city
     }
 
 }
 
 // MARK: - Configure Main Screen
 
-extension MainScreenPresenter {
+private extension MainScreenPresenter {
 
-    func getCurrentWeather() {
-        interactor.getInitialCurrentWeather { [weak self] data in
+    func getInitialWeather() {
+        interactor.fetchInitialWeather { [weak self] data in
             switch data {
             case .failure(let error):
                 print(error.rawValue)
@@ -52,7 +51,32 @@ extension MainScreenPresenter {
                     ]
                 )
             case .success(let data):
-                self?.state.weather = data
+                defaults.save(data, forKey: Saved.weather.rawValue)
+                defaults.save([data], forKey: Saved.weatherForSearchScreen.rawValue)
+
+                self?.view.configureMainScreen(with: data)
+            }
+        }
+    }
+
+    func getSavedWeather(for city: String) {
+        interactor.fetchWeather(for: city) { [weak self] data in
+            switch data {
+            case .failure(let error):
+                print(error.rawValue)
+                self?.view.showAlert(
+                    title: "There's a problem connecting to the server",
+                    message: "Please, try again in a while",
+                    actions: [
+                        UIAlertAction(
+                            title: "Ok",
+                            style: .default,
+                            handler: { _ in exit(0) }
+                        )
+                    ]
+                )
+            case .success(let data):
+                defaults.save(data, forKey: Saved.weather.rawValue)
                 self?.view.configureMainScreen(with: data)
             }
         }
@@ -64,10 +88,15 @@ extension MainScreenPresenter {
 
 extension MainScreenPresenter: LifecycleListener {
 
-    func viewDidLoad() {
-
+    func viewDidAppear() {
         // MARK: Get Current Location
-        getCurrentWeather()
+
+        if let сityForMainScreen = defaults.value(forKey: Saved.cityForMainScreen.rawValue) as? String {
+            getSavedWeather(for: сityForMainScreen)
+        } else {
+            defaults.set(["Kiev"], forKey: Saved.favouriteCitiesList.rawValue)
+            getInitialWeather()
+        }
     }
 
 }
@@ -78,71 +107,14 @@ extension MainScreenPresenter: MainScreenOutput {
 
     // MARK: Get Daily Model
     func getDailyModel() -> [WeatherViewModel.DailyForecastModel] {
-        state.weather.daily.map {
-            WeatherViewModel.DailyForecastModel(
-                dt: $0.dt,
-                weather: WeatherViewModel.WeatherElement(
-                    icon: $0.weather[safe: 0]?.weatherConditions.rawValue
-                ),
-                temperature: WeatherViewModel.Temperature(
-                    day: $0.temp.day.asRoundedString(),
-                    min: $0.temp.min.asRoundedString(),
-                    max: $0.temp.max.asRoundedString()
-                ),
-                humidity: String($0.humidity),
-                clouds: $0.clouds
-            )
-        }
+        let decodedWeather = defaults.loadObject(forKey: Saved.weather.rawValue, type: Weather.self)
+        return WeatherModelMappers().mapDailyWeatherModel(decodedWeather)
     }
 
     // MARK: Get Hourly Model
     func getHourlyModel() -> [WeatherViewModel.CurrentForecastModel] {
-        var viewModel = [WeatherViewModel.CurrentForecastModel]()
-
-        _ = state.weather.hourly.map {
-            let hourViewModel = WeatherViewModel.CurrentForecastModel(
-                dt: DateConverter.getHour(from: $0.dt),
-                temp: $0.temp.asRoundedString(),
-                weather: WeatherViewModel.WeatherElement(
-                    icon: $0.weather[safe: 0]?.weatherConditions.rawValue
-                )
-            )
-
-            viewModel.append(hourViewModel)
-        }
-
-        if viewModel[safe: 0] != nil {
-            viewModel[0].dt = "Now"
-        }
-
-        return viewModel
-    }
-
-}
-
-// MARK: - State
-
-private extension MainScreenPresenter {
-
-    struct State {
-        static let initial = Self(
-            weather: Weather(
-                timezone: "",
-                current: Current(
-                    dt: 0,
-                    temp: 0,
-                    humidity: 0,
-                    clouds: 0,
-                    weather: []
-                ),
-                daily: [],
-                hourly: []
-            ),
-            coordinates: CLLocationCoordinate2D()
-        )
-
-        var weather: Weather
-        var coordinates: CLLocationCoordinate2D
+        let decodedWeather = defaults.loadObject(forKey: Saved.weather.rawValue, type: Weather.self)
+        return WeatherModelMappers().mapHourlyWeatherModel(decodedWeather)
     }
 
 }

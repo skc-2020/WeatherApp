@@ -2,7 +2,7 @@
 //  Date Converter.swift
 //  WeatherApp
 //
-//  Created by AndUser on 07.04.2021.
+//  Created by SKC on 07.04.2021.
 //
 
 import Foundation
@@ -27,6 +27,15 @@ struct DateConverter {
         return String(Calendar.current.component(.hour, from: date))
     }
 
+    static func getTime(from timeInterval: Int) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(timeInterval))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        let dateString = dateFormatter.string(from: date)
+
+        return dateString
+    }
+
 }
 
 // MARK: - City Name Converter
@@ -34,9 +43,12 @@ struct DateConverter {
 struct CityNameConverter {
 
     static func getCityName(from model: String) -> String? {
-        guard let cityName = model.components(separatedBy: "/")[safe: 1] else {
+        guard var cityName = model.components(separatedBy: "/")[safe: 1] else {
             print("City name couldn't be get")
             return nil
+        }
+        if cityName.contains("_") {
+            cityName = cityName.replacingOccurrences(of: "_", with: " ")
         }
         return cityName
     }

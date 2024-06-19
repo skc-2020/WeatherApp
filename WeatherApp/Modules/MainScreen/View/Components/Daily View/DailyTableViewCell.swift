@@ -2,7 +2,7 @@
 //  WeeklyTableViewCell.swift
 //  WeatherApp
 //
-//  Created by AndUser on 26.03.2021.
+//  Created by SKC on 26.03.2021.
 //
 
 import UIKit
@@ -79,6 +79,11 @@ private extension DailyTableViewCell {
 
     func setupView() {
         backgroundColor = UIColor(white: 0, alpha: 0)
+        addSubviews(dayLabel,
+                    cloudnessImage,
+                    humidityLabel,
+                    maxTemperatureLabel,
+                    minTemperatureLabel)
     }
 
 }
@@ -89,12 +94,6 @@ private extension DailyTableViewCell {
 
     // swiftlint:disable function_body_length
     func setupViewConstraints() {
-        addSubviews(dayLabel,
-                    cloudnessImage,
-                    humidityLabel,
-                    maxTemperatureLabel,
-                    minTemperatureLabel)
-
         layoutMargins = UIEdgeInsets(top: 6, left: 0, bottom: 6, right: 0)
 
         dayLabel.pinTopEdge(to: .layout(layoutMarginsGuide), attribute: .top)
@@ -123,19 +122,5 @@ private extension DailyTableViewCell {
         minTemperatureLabel.pinTrailingEdge(to: .view(self), attribute: .trailing, constant: -10)
     }
     // swiftlint:enable function_body_length
-
-}
-
-// MARK: - Make functions
-
-private extension DailyTableViewCell {
-
-    static func makeTemperatureLabel(with font: UIFont) -> CustomLabel {
-        let label = CustomLabel()
-        label.font = font
-        label.textAlignment = .center
-
-        return label
-    }
 
 }
